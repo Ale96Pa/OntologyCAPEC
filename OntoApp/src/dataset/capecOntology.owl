@@ -1,0 +1,2697 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://krstProj.com/capec#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Class rdf:about="http://krstProj.com/capec#Description"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#Skill">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://krstProj.com/capec#AttackAbility"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#AttackPattern"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#Vulnerability"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#Status">
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://krstProj.com/capec#Abstraction"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Attack"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#Prerequisite">
+    <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#AttackAbility"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Likelihood"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#ExecutionFlow">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://krstProj.com/capec#AttackAction"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Id">
+    <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Name"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#Severity"/>
+  <owl:Class rdf:about="http://krstProj.com/capec#Consequence">
+    <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#AttackAction"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#MitigationAction">
+    <owl:disjointWith rdf:resource="http://krstProj.com/capec#Consequence"/>
+    <owl:disjointWith rdf:resource="http://krstProj.com/capec#ExecutionFlow"/>
+    <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#AttackAction"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Resource">
+    <owl:disjointWith rdf:resource="http://krstProj.com/capec#Skill"/>
+    <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#AttackAbility"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Attacker"/>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#reduces">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Attack"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#MitigationAction"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasSeverity">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Severity"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasAbstraction">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Abstraction"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#relatedTo">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attack"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#makes">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Attack"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attacker"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#exploits">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Vulnerability"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attack"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#executes">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#ExecutionFlow"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attack"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasName">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Name"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#uses">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Resource"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attacker"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasStatus">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Status"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#precondition">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Prerequisite"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attacker"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasLikelihood">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Likelihood"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasKnowledge">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Vulnerability"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attacker"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#implies">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Consequence"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attack"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://krstProj.com/capec#need">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Skill"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#Attacker"/>
+  </owl:ObjectProperty>
+  <owl:SymmetricProperty rdf:about="http://krstProj.com/capec#relatedPattern">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+    <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
+  </owl:SymmetricProperty>
+  <j.0:Id rdf:about="http://krstProj.com/capec#200">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Removal of filters: Input filters  output filters  data masking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#551">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Modify Existing Service"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#442">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Infected Software"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#224">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#575">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Account Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#466">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leveraging Active Man in the Middle Attacks to Bypass Same Origin Policy"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#599">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Terrestrial Jamming"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#248">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Command Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#115">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Authentication Bypass"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#139">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Relative Path Traversal"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#32">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Through HTTP Query Strings"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#2">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Inducing Account Lockout"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#310">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Scanning for Vulnerable Software"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#552">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Install Rootkit "/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#443">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Logic Inserted Into Product Software by Authorized Developer"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#201">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Entity Linking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#576">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Group Permission Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#116">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Excavation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#467">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross Site Identification"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#3">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Leading &apos;Ghost&apos; Character Sequences to Bypass Input Filters"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#33">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Request Smuggling"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#57">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Utilizing REST&apos;s Trust in the System Resource to Obtain Sensitive Data"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#573">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Process Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#222">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#iFrame Overlay"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#331">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP IP Total Length Field Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#464">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Evercookie"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#597">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Absolute Path Traversal"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#113">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#API Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#488">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Flood"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#137">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Parameter Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#440">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hardware Integrity Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#54">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Query System for Information"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#30">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hijacking a Privileged Thread of Execution"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#78">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Escaped Slashes in Alternate Encoding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#332">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP IP &apos;ID&apos; Field Error Message Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#441">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Logic Insertion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#574">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Services Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#114">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Authentication Abuse"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#465">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Transparent Proxy Abuse"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#598">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DNS Spoofing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#138">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Reflection Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#489">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SSL Flood"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#247">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Using Invalid Characters"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#550">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Install New Service"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#55">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Rainbow Table Password Cracking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#31">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Accessing/Intercepting/Modifying HTTP Cookies"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#1">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Accessing Functionality Not Properly Constrained by ACLs"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#79">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Slashes in Alternate Encoding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#244">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Targeting URI Placeholders"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#595">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Connection Reset"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#111">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#JSON Hijacking (aka JavaScript Hijacking)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#486">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#UDP Flood"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#268">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Audit Log Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#135">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Format String Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#159">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Redirect Access to Libraries"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#220">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Client-Server Protocol Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#571">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Block Logging to Central Repository"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#462">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross-Domain Search Timing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#6">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Argument Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#36">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Unpublished APIs"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#12">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Choosing Message Identifier"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#112">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Brute Force"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#463">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Padding Oracle Crypto Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#221">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML External Entities Blowup"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#596">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP RST Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#136">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#LDAP Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#487">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Flood"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#245">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Using Doubled Characters"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#330">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Error Message Echoing Integrity Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#572">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Artificially Inflate File Sizes"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#7">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Blind SQL Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#37">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Retrieve Embedded Sensitive Data"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#13">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Subverting Environment Variable Values"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#133">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Try All Common Switches"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#399">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cloning RFID Cards or Chips"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#157">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Sniffing Attacks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#460">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Parameter Pollution (HPP)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#242">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Code Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#593">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Session Hijacking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#10">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Buffer Overflow via Environment Variables"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#4">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Alternative IP Address Encodings"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#58">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Restful Privilege Elevation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#34">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Response Splitting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#485">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signature Spoofing by Key Recreation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#134">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Email Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#243">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Targeting HTML Attributes"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#158">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Sniffing Network Traffic"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#267">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leverage Alternate Encoding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#461">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Web Services API Signature Forgery Leveraging Hash Function Extension Weakness"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#110">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SQL Injection through SOAP Parameter Tampering"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#594">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Traffic Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#11">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cause Web Server Misclassification"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#5">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Blue Boxing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#59">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Session Credential Falsification through Prediction"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#35">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leverage Executable Code in Non-Executable Files"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#397">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cloning Magnetic Strip Cards"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#155">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Screen Temporary Files for Sensitive Information"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#179">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Calling Micro-Services Directly"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#240">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Resource Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#591">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Reflected XSS"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#482">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Flood"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#131">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Resource Leak Exposure"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#96">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Block Access to Libraries"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#72">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#URL Encoding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#398">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Magnetic Strip Card Brute Force Attacks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#592">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Stored XSS"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#132">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Symlink Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#97">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cryptanalysis"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#73">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#User-Controlled Filename"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#177">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Create files with the same name as files protected with a higher classification"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#480">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Escaping Virtualization"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#395">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Bypassing Electronic Locks and Access Controls"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#153">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Input Data Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#94">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Man in the Middle Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#70">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Try Common or Default Usernames and Passwords"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#178">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross-Site Flashing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#287">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP SYN Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#590">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#IP Address Blocking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#130">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Excessive Allocation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#481">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Contradictory Destinations in Traffic Routing Schemes"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#154">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Resource Location Spoofing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#263">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Force Use of Corrupted Files"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#95">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#WSDL Scanning"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#71">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Unicode Encoding to Bypass Validation Logic"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#199">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Using Alternate Syntax"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#393">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Lock Picking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#151">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Identity Spoofing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#175">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Code Inclusion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#76">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating Web Input to File System Calls"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#52">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Embedding NULL Bytes"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#261">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fuzzing for garnering other adjacent user/sensitive data"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#394">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using a Snap Gun Lock to Force a Lock"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#176">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Configuration/Environment Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#285">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Echo Request Ping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#77">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating User-Controlled Variables"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#53">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Postfix  Null Terminate  and Backslash"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#391">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Bypassing Physical Locks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#173">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Action Spoofing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#197">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Entity Expansion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#98">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Phishing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#619">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signal Strength Tracking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#74">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating User State"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#50">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Password Recovery Exploitation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#150">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Collect Data from Common Resource Locations"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#392">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Lock Bumping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#174">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Flash Parameter Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#198">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Targeting Error Pages"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#75">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating Writeable Configuration Files"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#51">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Poison Web Service Registry"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#195">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Principal Spoof"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#617">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cellular Rogue Base Station"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#390">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Bypassing Physical Security"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#196">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Session Credential Falsification through Forging"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#618">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cellular Broadcast Message Request"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#509">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Kerberoasting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#193">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#PHP Remote File Inclusion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#639">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Probe System Files"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#615">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Evil Twin Wi-Fi Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#506">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Tapjacking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#170">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Web Application Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#194">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fake the Source of Data"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#616">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Establish Rogue Location"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#507">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Physical Theft"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#503">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#WebView Exposure"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#612">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#WiFi MAC Address Tracking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#191">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Read Sensitive Strings Within an Executable"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#637">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Collect Data from Clipboard"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#92">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Forced Integer Overflow"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#504">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Task Impersonation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#528">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Flood"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#192">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Protocol Analysis"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#613">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#WiFi SSID Tracking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#638">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Altered Component Firmware"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#93">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Log Injection-Tampering-Forging"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#614">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Rooting SIM Cards"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#505">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Scheme Squatting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#529">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malware-Directed Internal Reconnaissance"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#501">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Activity Hijack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#90">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Reflection Attack in Authentication Protocol"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#634">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Probe Audio and Video Peripherals"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#610">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cellular Data Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#417">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#308">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#UDP Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#502">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Intent Spoof"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#635">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Alternative Execution Due to Deceptive Filenames"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#611">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#BitSquatting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#190">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Reverse Engineer an Executable to Expose Assumed Hidden Functionality"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#636">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hiding Malicious Data or Code within Files"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#309">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Network Topology Mapping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#418">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception of Reciprocation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#523">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Software Implanted"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#305">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP ACK Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#414">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pretexting via Delivery Person"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#547">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Physical Destruction of Device or Component"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#632">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Homograph Attack via Homoglyphs"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#548">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Contaminate Resource"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#306">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Window Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#439">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulation During Distribution"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#28">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fuzzing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#500">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#WebView Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#524">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Rogue Integration Procedures"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#415">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pretexting via Phone"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#633">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Token Impersonation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#307">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP RPC Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#416">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulate Human Behavior"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#29">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leveraging Time-of-Check and Time-of-Use (TOCTOU) Race Conditions"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#549">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Local Execution of Code"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#521">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hardware Design Specifications Are Altered"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#303">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Xmas Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#412">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pretexting via Customer Service"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#545">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pull Data from System Resources"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#327">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Options Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#569">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Collect Data as Provided by Users"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#630">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TypoSquatting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#219">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Routing Detour Attacks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#328">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP &apos;RST&apos; Flag Checksum Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#26">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leveraging Race Conditions"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#522">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Hardware Component Replacement"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#413">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pretexting via Tech Support"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#546">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Probe Application Memory"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#304">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Null Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#631">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SoundSquatting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#329">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Error Message Quoting Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#438">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Modification During Manufacture"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#27">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leveraging Race Conditions via Symbolic Links"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#301">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Connect Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#410">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Information Elicitation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#543">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Counterfeit Websites"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#325">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Congestion Control Flag (ECN) Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#434">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Target Influence via Interview and Interrogation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#458">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Flash Memory Attacks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#107">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross Site Tracing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#216">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Communication Channel Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#108">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Command Line Execution through SQL Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#520">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Counterfeit Hardware Component Inserted During Product Assembly"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#544">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Counterfeit Organizations"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#302">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP FIN Scan"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#435">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Target Influence via Instant Rapport"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#217">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploiting Incorrectly Configured SSL"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#568">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Capture Credentials via Keylogger"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#326">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Initial Window Size Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#459">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Creating a Rogue Certification Authority Certificate"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#109">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Object Relational Mapping Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#218">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Spoofing of UDDI/ebXML Messages"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#541">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Application Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#323">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP (ISN) Counter Rate Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#105">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Request Splitting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#456">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Infected Memory"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#214">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fuzzing for garnering J2EE/.NET-based stack traces  for application mapping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#589">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DNS Blocking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#129">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pointer Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#650">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Upload a Web Shell to a Web Server"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#542">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Targeted Malware"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#300">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Port Scanning"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#433">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Target Influence via The Human Buffer Overflow"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#215">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fuzzing and observing application log data/errors for application mapping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#324">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP (ISN) Sequence Predictability Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#457">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#USB Memory Attacks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#651">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Eavesdropping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#321">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Sequence Number Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#103">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Clickjacking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#563">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Add Malicious File to Shared Webroot"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#212">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Functionality Misuse"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#587">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross Frame Scripting (XFS)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#127">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Directory Indexing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#478">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Modification of Windows Service Configuration"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#236">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Catching exception throw/signal from privileged block"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#44">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Overflow Binary Resource File"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#20">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Encryption Brute Forcing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#68">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Subvert Code-signing Facilities"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#540">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Overread Buffers"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#564">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Run Software at Logon"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#322">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP (ISN) Greatest Common Divisor Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#237">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Escaping a Sandbox by Calling Signed Code in Another Language"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#588">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DOM-Based XSS"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#479">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Root Certificate"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#104">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross Zone Scripting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#128">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Integer Attacks"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#21">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploitation of Trusted Credentials"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#69">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Target Programs with Elevated Privileges"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#45">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Buffer Overflow via Symbolic Links"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#452">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Infected Hardware"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#585">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DNS Domain Seizure"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#125">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Flooding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#476">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signature Spoofing by Misrepresentation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#101">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Server Side Include (SSI) Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#234">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hijacking a privileged process"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#149">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Explore for Predictable Temporary File Names"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#561">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Windows Admin Shares with Stolen Credentials"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#66">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SQL Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#42">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#MIME Conversion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#562">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Modify Shared File"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#102">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Session Sidejacking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#320">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Timestamp Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#586">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Object Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#477">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signature Spoofing by Mixing Signed and Unsigned Content"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#126">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Path Traversal"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#43">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploiting Multiple Input Interpretation Layers"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#67">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#String Format Overflow in syslog()"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#123">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Buffer Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#474">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signature Spoofing by Key Theft"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#498">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Probe iOS Screenshots"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#147">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Ping of the Death"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#256">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SOAP Array Overflow"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#389">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Content Spoofing Via Application API Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#583">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Disabling Network Hardware"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#48">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Passing Local Filenames to Functions That Expect a URL"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#24">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Filter Failure through Buffer Overflow"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#233">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Privilege Escalation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#584">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#BGP Route Disabling"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#475">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signature Spoofing by Improper Validation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#100">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Overflow Buffers"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#124">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Shared Data Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#499">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Intent Intercept"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#148">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Content Spoofing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#560">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Use of Known Domain Credentials"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#49">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Password Brute Forcing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#25">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Forced Deadlock"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#145">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Checksum Spoofing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#496">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Fragmentation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#387">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Navigation Remapping To Propagate Malicious Content"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#169">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#278">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Web Services Protocol Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#581">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Security Software Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#472">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Browser Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#121">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploit Test APIs"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#230">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Nested Payloads"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#22">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploiting Trust in Client"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#46">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Overflow Variables and Tags"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#122">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Privilege Abuse"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#497">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#File Discovery"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#279">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SOAP Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#388">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Application API Button Hijacking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#146">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Schema Poisoning"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#231">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Oversized Payloads"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#582">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Route Disabling"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#473">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signature Spoof"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#47">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Buffer Overflow via Parameter Expansion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#23">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#File Content Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#167">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#White Box Reverse Engineering"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#276">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Inter-component Protocol Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#470">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Expanding Control over the Operating System from the Database"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#143">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Detect Unpublicized Web Pages"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#494">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP Fragmentation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#252">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#PHP Local File Inclusion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#385">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Transaction or Event Tampering via Application API Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#84">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XQuery Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#60">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Reusing Session IDs (aka Session Replay)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#277">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Data Interchange Protocol Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#386">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Application API Navigation Remapping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#144">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Detect Unpublicized Web Services"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#168">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Windows ::DATA Alternate Data Stream"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#580">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Application Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#471">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Search Order Hijacking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#253">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Remote Code Inclusion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#120">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Double Encoding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#495">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#UDP Fragmentation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#85">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#AJAX Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#61">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Session Fixation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#189">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Black Box Reverse Engineering"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#298">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#UDP Ping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#141">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cache Poisoning"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#492">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Regular Expression Exponential Blowup"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#250">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#383">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Harvesting Information via API Event Monitoring"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#165">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#File Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#274">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Verb Tampering"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#299">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP SYN Ping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#166">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Force the System to Reset Values"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#251">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Local Code Inclusion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#493">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SOAP Array Blowup"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#384">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Application API Message Manipulation via Man-in-the-Middle"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#275">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DNS Rebinding"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#142">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DNS Cache Poisoning"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#83">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XPath Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#490">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Amplification"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#163">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Spear Phishing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#272">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Protocol Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#187">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Automated Software Update"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#296">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Information Request"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#88">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#OS Command Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#609">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cellular Traffic Intercept"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#64">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Slashes and URL Encoding Combined to Bypass Validation Logic"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#40">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating Writeable Terminal Devices"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#188">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Reverse Engineering"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#491">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Quadratic Expansion"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#273">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP Response Smuggling"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#140">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Bypassing of Intermediate Forms in Multiple-Form Sets"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#297">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#TCP ACK Ping"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#164">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Mobile Phishing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#65">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Sniff Application Code"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#41">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Meta-characters in E-mail Headers to Inject Malicious Payloads"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#89">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pharming"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#161">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Infrastructure Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#270">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Modification of Registry Run Keys"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#185">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Software Download"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#294">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ICMP Address Mask Request"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#86">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Through HTTP Headers"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#607">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Obstruction"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#62">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross Site Request Forgery"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#271">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Schema Poisoning"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#295">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Timestamp Request"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#162">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating Hidden Fields"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#186">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Software Update"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#87">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Forceful Browsing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#608">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cryptanalysis of Cellular Encryption"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#63">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cross-Site Scripting (XSS)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#183">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#IMAP/SMTP Command Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#292">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Host Discovery"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#629">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Unauthorized Use of Device Resources"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#605">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Cellular Jamming"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#293">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Traceroute Route Enumeration"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#160">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploit Script-Based APIs"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#184">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Software Integrity Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#606">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Weakening of Cellular Encryption"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#181">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Flash File Overlay"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#290">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Enumerate Mail Exchange (MX) Records"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#627">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Counterfeit GPS Signals"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#603">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Blockage"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#518">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Documentation Alteration to Produce Under-performing Systems"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#291">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DNS Zone Transfers"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#182">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Flash Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#628">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Carry-Off GPS Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#604">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Wi-Fi Jamming"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#519">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Documentation Alteration to Cause Errors in System Design"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#624">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Fault Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#80">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using UTF-8 Encoding to Bypass Validation Logic"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#649">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Adding a Space to a File Extension"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#625">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Mobile Device Fault Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#516">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hardware Component Substitution During Baselining"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#407">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Pretexting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#601">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Jamming"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#180">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Exploiting Incorrectly Configured Access Control Security Levels"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#81">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Web Logs Tampering"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#626">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Smudge Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#517">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Documentation Alteration to Circumvent Dial-down"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#646">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Peripheral Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#622">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Electromagnetic Side-Channel Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#647">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Collect Data from Registries"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#538">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Open Source Libraries Altered"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#429">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Target Influence via Eye Cues"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#623">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Compromising Emanations Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#648">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Collect Data from Screen Capture"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#406">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Dumpster Diving"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#539">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#ASIC With Malicious Functionality"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#511">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Infiltration of Software Development Environment"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#402">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Bypassing ATA Password Security"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#535">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Gray Market Hardware"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#426">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence via Incentives"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#644">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Use of Captured Hashes (Pass The Hash)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#620">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Drop Encryption Level"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#318">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#IP &apos;ID&apos; Echoed Byte-Order Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#427">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence via Psychological Principles"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#16">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Dictionary-based Password Attack"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#209">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Using MIME Type Mismatch"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#536">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Data Injected During Configuration"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#645">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Use of Captured Tickets (Pass The Ticket)"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#621">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Analysis of Packet Timing and Sizes"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#537">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Infiltration of Hardware Development Environment"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#428">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence via Modes of Thinking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#17">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Using Malicious Files"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#319">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#IP (DF) &apos;Don&apos;t Fragment Bit&apos; Echoing Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#400">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#RFID Chip Deactivation or Destruction"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#533">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Manual Software Update"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#424">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception of Consensus or Social Proof"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#206">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Signing Malicious Code"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#448">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Embed Virus into DLL"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#9">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Buffer Overflow in Local Command-Line Utilities"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#642">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Replace Binaries"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#8">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Buffer Overflow in an API Call"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#207">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Removing Important Client Functionality"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#38">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Leveraging/Manipulating Configuration File Search Paths"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#14">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Client-side Injection-induced Buffer Overflow"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#510">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#SaaS User Request Forgery"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#401">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hacking Hardware"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#534">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Hardware Update"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#425">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Target Influence via Framing"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#558">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Replace Trusted Executable"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#643">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Identify Shared Files/Directories on System"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#559">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Orbital Jamming"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#208">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Removing/short-circuiting &apos;Purse&apos; logic: removing/mutating &apos;cash&apos; decrements"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#317">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#IP ID Sequencing Probe"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#39">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulating Opaque Client-based Data Tokens"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#15">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Command Delimiters"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#531">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Hardware Component Substitution"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#422">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception of Commitment and Consistency"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#204">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Lifting Sensitive Data Embedded in Cache"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#555">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Remote Services with Stolen Credentials"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#313">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Passive OS Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#446">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Logic Insertion into Product Software via Inclusion of 3rd Party Component Dependency"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#228">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DTD Injection"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#579">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Replace Winlogon Helper DLL"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#640">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Inclusion of Code in Existing Process"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#229">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XML Attribute Blowup"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#532">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Altered Installed BIOS"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#423">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception of Liking"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#556">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Replace File Extension Handlers"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#447">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Design Alteration"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#641">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#DLL Side-Loading"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#420">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception of Scarcity"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#202">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Create Malicious Client"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#444">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Development Alteration"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#226">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Session Credential Falsification through Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#577">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Owner Footprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#468">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Generic Cross-Browser Cross-Domain Theft"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#117">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Interception"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#18">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#XSS Targeting Non-Script Elements"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#530">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Provide Counterfeit Component"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#312">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Active OS Fingerprinting"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#421">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Influence Perception of Authority"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#554">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Functionality Bypass"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#445">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Malicious Logic Insertion into Product Software via Configuration Management Manipulation"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#578">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Disable Security Software"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#203">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Manipulate Registry Information"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#469">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#HTTP DoS"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#227">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Sustained Client Engagement"/>
+    </j.0:hasName>
+  </j.0:Id>
+  <j.0:Id rdf:about="http://krstProj.com/capec#19">
+    <j.0:hasName>
+      <j.0:Name rdf:about="http://krstProj.com/capec#Embedding Scripts within Scripts"/>
+    </j.0:hasName>
+  </j.0:Id>
+</rdf:RDF>
