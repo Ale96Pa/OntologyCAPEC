@@ -12,12 +12,14 @@ import org.apache.jena.ontology.ObjectProperty;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.util.iterator.ExtendedIterator;
 
 
 public class OntoCapecManagement {
     
-    private String ontologyPath = "src\\dataset\\capecOntology.owl";
+    private String ontologyPath = "src\\dataset\\capecOntologySmall.owl";
     private String datasetPath = "src\\dataset\\capec.csv";
+    private String myns = "http://krstProj.com/capec#" ;
     
     public String wellFormedUri(String str){
         str = str.replace("%", "%25");
@@ -27,11 +29,10 @@ public class OntoCapecManagement {
         return str;
     }
     
-    public void createModel(){
+    public OntModel createModel(){
         
         // Initialize the model for the ontology
         OntModel m = ModelFactory.createOntologyModel();
-        String myns = "http://krstProj.com/capec#" ;
         
         /************
          * CLASSES  *
@@ -45,7 +46,6 @@ public class OntoCapecManagement {
         OntClass name = m.createClass(myns + "Name");
         OntClass abstraction = m.createClass(myns + "Abstraction");
         OntClass status = m.createClass(myns + "Status");
-        OntClass description = m.createClass(myns + "Description");
         OntClass likelihood = m.createClass(myns + "Likelihood");
         OntClass severity = m.createClass(myns + "Severity");
         
@@ -73,9 +73,6 @@ public class OntoCapecManagement {
          * OBJECT PROPERTY *
          ******************/
         // Create ObjectProperty for attackPattern
-        /*ObjectProperty hasId = m.createObjectProperty(myns +"hasId");
-        hasId.addDomain(attackPattern);
-        hasId.addRange(id);*/
         ObjectProperty hasName = m.createObjectProperty(myns +"hasName");
         hasName.addDomain(attackPattern);
         hasName.addRange(name);
@@ -156,7 +153,6 @@ public class OntoCapecManagement {
                 String name_ = data[1];
                 String abstraction_ = data[2];
                 String status_ = data[3];
-                String description_ = data[4];
                 String likelihood_ = data[6];
                 String severity_ = data[7];
                 String relatedPattern_ = data[8];
@@ -172,14 +168,12 @@ public class OntoCapecManagement {
                 prereq_ = wellFormedUri(prereq_);
                 mitigation_ = wellFormedUri(mitigation_);
                 
-                
                 Individual attackerP = attacker.createIndividual(myns+"attacker"+counter);
                 Individual attackActP = attack.createIndividual(myns+"attack"+counter); 
                 Individual attackP = id.createIndividual(myns+id_);
                 Individual nameP = name.createIndividual(myns+name_);
                 Individual abstP = abstraction.createIndividual(myns+abstraction_);
                 Individual statP = status.createIndividual(myns+status_);
-            //    Individual descP = description.createIndividual(myns+description_);
                 Individual likeP = likelihood.createIndividual(myns+likelihood_);
                 Individual sevP = severity.createIndividual(myns+severity_);
                 Individual relP = attackPattern.createIndividual(myns+relatedPattern_);
@@ -205,7 +199,7 @@ public class OntoCapecManagement {
                 
                 m.add(attackerP, uses, resP);
                 m.add(attackerP, needs, skillP);
-                m.add(attackerP, precondition, prereqP);
+               m.add(attackerP, precondition, prereqP);
                 
                 m.add(attackerP, hasKnowledge, vulnP);
                 m.add(attackerP, makes, attackActP);
@@ -215,7 +209,9 @@ public class OntoCapecManagement {
                 m.add(attackerP, relatedTo, attackP);
 
                 counter++;
+                if(counter == 200 && ontologyPath.contains("Small")){break;}
             }
+            System.out.println("Parsed " +counter+ " data");
         } 
         catch (FileNotFoundException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}
@@ -239,6 +235,21 @@ public class OntoCapecManagement {
           if (out != null) {
             try {out.close();} catch (IOException ex){ex.printStackTrace();}
           }
+        }
+        
+        return m;
+    }
+    
+    public void makeQuery(){
+
+    }
+    
+    public void reasoningTasks(OntModel m){
+        
+        //OntClass cl = m.getOntClass(myns + "Name");
+        for (ExtendedIterator i = m.listClasses(); i.hasNext();){
+            OntClass c = (OntClass) i.next();
+            System.out.println(c.getLocalName() + " ");
         }
     }
 }
