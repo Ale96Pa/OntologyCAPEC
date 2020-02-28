@@ -19,6 +19,14 @@ public class OntoCapecManagement {
     private String ontologyPath = "src\\dataset\\capecOntology.owl";
     private String datasetPath = "src\\dataset\\capec.csv";
     
+    public String wellFormedUri(String str){
+        str = str.replace("%", "%25");
+        str = str.replace("[", "(");
+        str = str.replace("]", ")");
+        str = str.replace("#", "%23");
+        return str;
+    }
+    
     public void createModel(){
         
         // Initialize the model for the ontology
@@ -30,8 +38,6 @@ public class OntoCapecManagement {
          ***********/
         // Create classes
         OntClass attackPattern = m.createClass(myns + "AttackPattern");
-        OntClass attackAbility = m.createClass(myns + "AttackAbility");
-        OntClass attackAction = m.createClass(myns + "AttackAction");
         OntClass attacker = m.createClass(myns + "Attacker");
         OntClass attack = m.createClass(myns + "Attack");
         
@@ -42,7 +48,6 @@ public class OntoCapecManagement {
         OntClass description = m.createClass(myns + "Description");
         OntClass likelihood = m.createClass(myns + "Likelihood");
         OntClass severity = m.createClass(myns + "Severity");
-        //OntClass relatedPattern = m.createClass(myns + "Vehicle");
         
         OntClass prereq = m.createClass(myns + "Prerequisite");
         OntClass skill = m.createClass(myns + "Skill");
@@ -54,13 +59,13 @@ public class OntoCapecManagement {
         OntClass mitigation = m.createClass(myns + "MitigationAction");
         
         // Create classes hierarchy
-        attackAbility.addSubClass(prereq);
-        attackAbility.addSubClass(resource);
-        attackAbility.addSubClass(skill);
+        attacker.addSubClass(prereq);
+        attacker.addSubClass(resource);
+        attacker.addSubClass(skill);
         
-        attackAction.addSubClass(exeFlow);
-        attackAction.addSubClass(consequence);
-        attackAction.addSubClass(mitigation);
+        attack.addSubClass(exeFlow);
+        attack.addSubClass(consequence);
+        attack.addSubClass(mitigation);
         
         attackPattern.addSubClass(id);
         
@@ -137,6 +142,7 @@ public class OntoCapecManagement {
         /***************
          * INDIVIDUALS *
          **************/
+        int counter = 0;
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(datasetPath));
@@ -161,33 +167,54 @@ public class OntoCapecManagement {
                 String consequence_ = data[14];
                 String mitigation_ = data[15];
                 String vulnerability_ = data[17];
+               
+                exeFlow_ = wellFormedUri(exeFlow_);
+                prereq_ = wellFormedUri(prereq_);
+                mitigation_ = wellFormedUri(mitigation_);
                 
+                
+                Individual attackerP = attacker.createIndividual(myns+"attacker"+counter);
+                Individual attackActP = attack.createIndividual(myns+"attack"+counter); 
                 Individual attackP = id.createIndividual(myns+id_);
-                Individual nameP = name.createIndividual(myns+name_);/*
-                Individual abstP = name.createIndividual(myns+abstraction_);
-                Individual statP = name.createIndividual(myns+status_);
-                Individual descP = name.createIndividual(myns+description_);
-                Individual likeP = name.createIndividual(myns+likelihood_);
-                Individual sevP = name.createIndividual(myns+severity_);
-                Individual relP = name.createIndividual(myns+relatedPattern_);
-                Individual flowP = name.createIndividual(myns+exeFlow_);
-                Individual prereqP = name.createIndividual(myns+prereq_);
-                Individual skillP = name.createIndividual(myns+skill_);
-                Individual resP = name.createIndividual(myns+resource_);
-                Individual consP = name.createIndividual(myns+consequence_);
-                Individual mitigP = name.createIndividual(myns+mitigation_);
-                Individual vulnP = name.createIndividual(myns+vulnerability_);*/
+                Individual nameP = name.createIndividual(myns+name_);
+                Individual abstP = abstraction.createIndividual(myns+abstraction_);
+                Individual statP = status.createIndividual(myns+status_);
+            //    Individual descP = description.createIndividual(myns+description_);
+                Individual likeP = likelihood.createIndividual(myns+likelihood_);
+                Individual sevP = severity.createIndividual(myns+severity_);
+                Individual relP = attackPattern.createIndividual(myns+relatedPattern_);
+                Individual flowP = exeFlow.createIndividual(myns+exeFlow_);
+                Individual prereqP = prereq.createIndividual(myns+prereq_);
+                Individual skillP = skill.createIndividual(myns+skill_);
+                Individual resP = resource.createIndividual(myns+resource_);
+                Individual consP = consequence.createIndividual(myns+consequence_);
+                Individual mitigP = mitigation.createIndividual(myns+mitigation_);
+                Individual vulnP = vulnerability.createIndividual(myns+vulnerability_);
                 
                 // Object Property assertions
                 m.add(attackP, hasName, nameP);
+                m.add(attackP, hasAbstraction, abstP);
+                m.add(attackP, hasStatus, statP);
+                m.add(attackP, hasSeverity, sevP);
+                m.add(attackP, hasLikelihood, likeP);
+                m.add(attackP, relatedPattern, relP);
                 
-            /*    
-                System.out.println("ID: "+ ID+ " \nName: "+ name+ " \nabstraction: "+ abstraction
-                + " \nstatus: "+ status + " \ndescription: "+ description+ " \nlikelihood: "+ likelihood+ 
-                        " \nseverity: "+ severity + " \nrelatedPatt: "+ relatedPattern+ " \nexeFlow: "+ exeFlow+ 
-                        " \nprereq: "+ prereq+ " \nskill: "+ skill+ " \nres: "+ resource+ " \ncons: "+ consequence
-                + " \nmitigation: "+ mitigation + " \nvulnerability: "+ vulnerability);         
-            */           
+                m.add(attackActP, implies, consP);
+                m.add(attackActP, executes, flowP);
+                m.add(mitigP, reduces, attackActP);
+                
+                m.add(attackerP, uses, resP);
+                m.add(attackerP, needs, skillP);
+                m.add(attackerP, precondition, prereqP);
+                
+                m.add(attackerP, hasKnowledge, vulnP);
+                m.add(attackerP, makes, attackActP);
+                m.add(attackActP, exploits, vulnP);
+                m.add(attackActP, relatedTo, attackP);
+                
+                m.add(attackerP, relatedTo, attackP);
+
+                counter++;
             }
         } 
         catch (FileNotFoundException e) {e.printStackTrace();}
