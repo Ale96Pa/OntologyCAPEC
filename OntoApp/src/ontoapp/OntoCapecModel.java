@@ -1,63 +1,44 @@
+/**
+ * This class manages the management of the model based on CAPEC dataset. It has
+ * methods to create the model of the ontology and to fill with real data.
+ */
 package ontoapp;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import static java.lang.Integer.parseInt;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import jena.query;
+
 import org.apache.jena.ontology.Individual;
-import org.apache.jena.ontology.IntersectionClass;
 import org.apache.jena.ontology.ObjectProperty;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
-import org.apache.jena.query.ParameterizedSparqlString;
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryExecException;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.InfModel;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
-import org.apache.jena.reasoner.Reasoner;
-import org.apache.jena.reasoner.ReasonerRegistry;
-import org.apache.jena.reasoner.ValidityReport;
-import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
-import org.apache.jena.util.PrintUtil;
-import org.apache.jena.util.iterator.ExtendedIterator;
 
 
-public class OntoCapecManagement {
+public class OntoCapecModel {
     
-    private String ontologyPath = "src\\dataset\\capecOntologySmall.owl";
-    private String datasetPath = "src\\dataset\\capec.csv";
-    private String myns = "http://krstProj.com/capec#" ;
+    // Attributes representing constant elements in the ontology
+    final String ontologyPath = "src\\dataset\\capecOntology.owl";
+    final String datasetPath = "src\\dataset\\capec.csv";
+    final String myns = "http://krstProj.com/capec#" ;
+
+    // Attribute for customization
+    boolean disjointness = false; // Set true if insert disjoint assertions (create conflicts because of null values)
+    int numRows = 200; // Number of rows to read from CAPEC dataset (max 517, -1 for full dataset)
+    String formatFile = "RDF/XML-ABBREV"; // Format of the output file
     
+    // Getter of myns URI
+    public String getMynsUri() {return myns;}
+    
+    /**
+     * This method replaces the invalid characters for URI used in ontology
+     * @param str: String to transform in legal format
+     * @return well formatted string
+     */
     public String wellFormedUri(String str){
         str = str.replace("%", "%25");
         str = str.replace("[", "(");
@@ -66,6 +47,13 @@ public class OntoCapecManagement {
         return str;
     }
     
+    /**
+     * This method creates the model of the ontology based on CAPEC dataset. 
+     * It has:
+     *      16 Classes
+     *      16 Object Property
+     * @return the model created (moreover it writes and generates an owl file)
+     */
     public OntModel createModel(){
         
         // Initialize the model for the ontology
@@ -165,27 +153,31 @@ public class OntoCapecManagement {
         relatedPattern.addDomain(attackPattern);
         relatedPattern.addRange(attackPattern);
         
+        
         /****************
          * DISJOINTNESS *
          ***************/
         status.addDisjointWith(abstraction);
-//        mitigation.addDisjointWith(exeFlow);
-//        mitigation.addDisjointWith(consequence);
-//        resource.addDisjointWith(skill);
+        if(disjointness){
+            mitigation.addDisjointWith(exeFlow);
+            mitigation.addDisjointWith(consequence);
+            resource.addDisjointWith(skill);
+        }
         
         /***************
          * INDIVIDUALS *
          **************/
-        int counter = 0;
+        int counter = 0; // T not load the whole file
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(datasetPath));
-            br.readLine(); // this will read the first line
-            String line=null;
-            while ((line = br.readLine()) != null) {
-                
+            br.readLine(); // skip the first line (header)
+            String line;
+            
+            while((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 
+                // Elements in CAPEC dataset
                 String id_ = data[0];
                 String name_ = data[1];
                 String abstraction_ = data[2];
@@ -200,11 +192,13 @@ public class OntoCapecManagement {
                 String consequence_ = data[14];
                 String mitigation_ = data[15];
                 String vulnerability_ = data[17];
-               
+                
+                // Format string in appropriate way
                 exeFlow_ = wellFormedUri(exeFlow_);
                 prereq_ = wellFormedUri(prereq_);
                 mitigation_ = wellFormedUri(mitigation_);
                 
+                // Create instances of classes
                 Individual attackerP = attacker.createIndividual(myns+"attacker"+counter);
                 Individual attackActP = attack.createIndividual(myns+"attack"+counter); 
                 Individual attackP = id.createIndividual(myns+id_);
@@ -222,7 +216,7 @@ public class OntoCapecManagement {
                 Individual mitigP = mitigation.createIndividual(myns+mitigation_);
                 Individual vulnP = vulnerability.createIndividual(myns+vulnerability_);
                 
-                // Object Property assertions
+                // Object Property assertions (attack pattern)
                 m.add(attackP, hasName, nameP);
                 m.add(attackP, hasAbstraction, abstP);
                 m.add(attackP, hasStatus, statP);
@@ -230,170 +224,50 @@ public class OntoCapecManagement {
                 m.add(attackP, hasLikelihood, likeP);
                 m.add(attackP, relatedPattern, relP);
                 
+                // Object Property assertions (attack)
                 m.add(attackActP, implies, consP);
                 m.add(attackActP, executes, flowP);
                 m.add(mitigP, reduces, attackActP);
                 
+                // Object Property assertions (attacker)
                 m.add(attackerP, uses, resP);
                 m.add(attackerP, needs, skillP);
-               m.add(attackerP, precondition, prereqP);
+                m.add(attackerP, precondition, prereqP);
                 
+                // Object Property assertions (vulnerability and relations)
                 m.add(attackerP, hasKnowledge, vulnP);
                 m.add(attackerP, makes, attackActP);
                 m.add(attackActP, exploits, vulnP);
                 m.add(attackActP, relatedTo, attackP);
-                
                 m.add(attackerP, relatedTo, attackP);
 
                 counter++;
-                if(counter == 200 && ontologyPath.contains("Small")){break;}
+                if(counter == numRows){break;}
             }
-            System.out.println("Parsed " +counter+ " data");
+            System.out.println("Read, parsed and inserted " +counter+ " data");
         }
         
         catch (FileNotFoundException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}
         finally {
-            if (br != null) {
-                try {br.close();
-                } catch (IOException e) {e.printStackTrace();}
+            if (br != null){
+                try {br.close();}
+                catch (IOException e) {e.printStackTrace();}
             }
         }
         
        // Write the model on owl file with rdf/xml format
         FileWriter out = null;
         try {
-          // rdf/xml format for owl file
           out = new FileWriter(ontologyPath);
-          m.write( out, "RDF/XML-ABBREV" );
+          m.write(out, formatFile);
         }
-        catch (IOException ex) {
-            Logger.getLogger(OntoCapecManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-          if (out != null) {
-            try {out.close();} catch (IOException ex){ex.printStackTrace();}
-          }
+        catch (IOException ex) {Logger.getLogger(OntoCapecModel.class.getName()).log(Level.SEVERE, null, ex);}
+        finally {
+          if (out != null){
+            try {out.close();}
+            catch (IOException ex){ex.printStackTrace();}}
         }
         return m;
     }
-    
-    public void makeQuery(OntModel m, String query){
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String inputSparql = "";
-            if(query == "" || query == null){
-                System.out.println("*** SPARQL example: SELECT ?subject ?object "
-                        + "WHERE { ?subject myns:hasName ?object }\n"
-                        + "Write SPARQL query as in the example"
-                        + ":");
-                inputSparql = reader.readLine();
-            } else {
-                inputSparql = query;
-            }
-            
-            String q = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
-                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
-                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
-                        "PREFIX myns: <http://krstProj.com/capec#>" +
-                        inputSparql;
-            Query qry = QueryFactory.create(q);
-            QueryExecution qe = QueryExecutionFactory.create(qry, m);
-            ResultSet rs;
-            boolean boolAsk;
-            try{
-                rs = qe.execSelect();
-                String select = inputSparql.split("WHERE")[0];
-                String[] vars = select.split("\\?");
-
-                int numVar = vars.length;
-                while(rs.hasNext())
-                {
-                    QuerySolution sol = rs.nextSolution();
-                    String[] results = new String[numVar-1];
-                    for(int i=1; i<numVar; i++){
-                        RDFNode result = sol.get(vars[i].replace(" ", "")); 
-                        results[i-1] = result.toString().split("#")[1];
-                        //System.out.println(str.toString().split("#")[1] + "  " + thing.toString().split("#")[1]);
-                    }
-                    System.out.println(Arrays.toString(results));
-                }
-            } catch(QueryExecException e){
-                boolAsk = qe.execAsk();
-                System.out.println(boolAsk);
-            }
-            qe.close();             
-
-        } catch (IOException ex) {
-            Logger.getLogger(OntoCapecManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-    }
-    
-    // 1. Instances do not respect ontology (Ontology consistency)
-    // 2. Class that cannot have any instance (Concept consistency)
-    public void detectInconsistency(OntModel m){
-        
-        // Example violation 1 (ontology consistency)
-        OntClass conf1 = m.createClass(myns+"Conf1");
-        OntClass conf2 = m.createClass(myns+"Conf2");
-        conf1.addDisjointWith(conf2);
-        IntersectionClass conflict = m.createIntersectionClass( myns + "Conflict", 
-                m.createList( new RDFNode[] {conf1, conf2} ) );
-        
-        // Example violation 2 (concept consistency)
- /*       OntClass resource = m.getOntClass(myns + "Resource");
-        OntClass skill = m.getOntClass(myns + "Skill");
-        resource.addDisjointWith(skill);
- */       
-        // Start reasoner
-        Reasoner reasoner = ReasonerRegistry.getOWLReasoner();
-        InfModel inf = ModelFactory.createInfModel(reasoner, m);
-        
-        // Check validity
-        ValidityReport validity = inf.validate();
-        if (validity.isValid()){
-            System.out.println("OK");
-        }
-        else{
-            System.out.println("Conflicts");
-            for (Iterator i = validity.getReports(); i.hasNext(); ){
-                ValidityReport.Report report =(ValidityReport.Report)i.next();
-                System.out.println(" - " + report);
-            }
-        }
-    }
-    
-    // 1. Find all subclasses in the model (Classification of T-Box)
-    // 2. Check if concept C is subsumed by concept D (Concept subsumption)
-    public void findSubclass(OntModel m, String C, String D){
-        
-        if(C == "" || D == ""){
-            // Example point 1 (T-Box classification)
-            makeQuery(m, "SELECT ?super ?sub WHERE { ?sub rdfs:subClassOf ?super }");
-        } else{
-            // Example point 2 (Concept subsumption)
-            makeQuery(m, "ASK WHERE{ myns:"+ C + " rdfs:subClassOf myns:"+ D + " }");
-        }
-        
-    }
-    
-    // 1. Return all members of a concept C (instance retrieval)
-    // 2. Check if the instance a is instance of concept C (instance checking)
-    public void instanceChecking(OntModel m, String a, String C){
-        if(a == ""){
-            // Example point 1 (instance retrieval)
-            OntClass conceptC = m.getOntClass(myns + C);
-            ExtendedIterator instances = conceptC.listInstances();
-            while (instances.hasNext()){
-                Individual thisInstance = (Individual) instances.next();
-                System.out.println("Found instance: " + thisInstance.toString().split("#")[1]);
-            }
-        } else{
-            // Example point 2 (instance checking)
-            makeQuery(m, "ASK WHERE{ myns:"+ a + " rdf:type myns:"+ C + " }");
-            
-        }
-        
-    }
-
 }
