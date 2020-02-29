@@ -11,11 +11,7 @@
   </owl:Class>
   <owl:Class rdf:about="http://krstProj.com/capec#AttackPattern"/>
   <owl:Class rdf:about="http://krstProj.com/capec#Vulnerability"/>
-  <owl:Class rdf:about="http://krstProj.com/capec#Status">
-    <owl:disjointWith>
-      <owl:Class rdf:about="http://krstProj.com/capec#Abstraction"/>
-    </owl:disjointWith>
-  </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Status"/>
   <owl:Class rdf:about="http://krstProj.com/capec#Attack"/>
   <owl:Class rdf:about="http://krstProj.com/capec#Prerequisite">
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attacker"/>
@@ -24,6 +20,7 @@
   <owl:Class rdf:about="http://krstProj.com/capec#ExecutionFlow">
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attack"/>
   </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Abstraction"/>
   <owl:Class rdf:about="http://krstProj.com/capec#Id">
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#AttackPattern"/>
   </owl:Class>
@@ -33,12 +30,9 @@
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attack"/>
   </owl:Class>
   <owl:Class rdf:about="http://krstProj.com/capec#MitigationAction">
-    <owl:disjointWith rdf:resource="http://krstProj.com/capec#Consequence"/>
-    <owl:disjointWith rdf:resource="http://krstProj.com/capec#ExecutionFlow"/>
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attack"/>
   </owl:Class>
   <owl:Class rdf:about="http://krstProj.com/capec#Resource">
-    <owl:disjointWith rdf:resource="http://krstProj.com/capec#Skill"/>
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attacker"/>
   </owl:Class>
   <owl:ObjectProperty rdf:about="http://krstProj.com/capec#reduces">

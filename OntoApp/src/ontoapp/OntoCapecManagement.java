@@ -1,17 +1,40 @@
 package ontoapp;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import jena.query;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.ObjectProperty;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.query.ParameterizedSparqlString;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
 import org.apache.jena.util.iterator.ExtendedIterator;
 
 
@@ -131,11 +154,11 @@ public class OntoCapecManagement {
         /****************
          * DISJOINTNESS *
          ***************/
-        status.addDisjointWith(abstraction);
+/*        status.addDisjointWith(abstraction);
         mitigation.addDisjointWith(exeFlow);
         mitigation.addDisjointWith(consequence);
         resource.addDisjointWith(skill);
-        
+*/        
         /***************
          * INDIVIDUALS *
          **************/
@@ -236,12 +259,38 @@ public class OntoCapecManagement {
             try {out.close();} catch (IOException ex){ex.printStackTrace();}
           }
         }
-        
         return m;
     }
     
-    public void makeQuery(){
+    public void makeQuery(OntModel m){
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String inputSparql = reader.readLine();   
+            
+            String q = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                        "PREFIX myns: <http://krstProj.com/capec#>" +
+                        inputSparql;
+                        //"SELECT ?subject ?object WHERE { ?subject myns:hasName ?object }"; // SPARQL query to execute
+            Query qry = QueryFactory.create(q);
+            QueryExecution qe = QueryExecutionFactory.create(qry, m);
+            ResultSet rs = qe.execSelect();
 
+            while(rs.hasNext())
+            {
+                QuerySolution sol = rs.nextSolution();
+                RDFNode str = sol.get("subject"); 
+                RDFNode thing = sol.get("object"); 
+                System.out.println(str.toString().split("#")[1] + "  " + thing.toString().split("#")[1]);
+            }
+
+            qe.close();             
+
+        } catch (IOException ex) {
+            Logger.getLogger(OntoCapecManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void reasoningTasks(OntModel m){
@@ -252,4 +301,5 @@ public class OntoCapecManagement {
             System.out.println(c.getLocalName() + " ");
         }
     }
+
 }

@@ -13,7 +13,7 @@ public class OntoApp {
 
         OntoCapecManagement onto = new OntoCapecManagement();
         OntModel modelCapec = onto.createModel();
-        
+        onto.makeQuery(modelCapec);
         //onto.reasoningTasks(modelCapec);
     }
     
