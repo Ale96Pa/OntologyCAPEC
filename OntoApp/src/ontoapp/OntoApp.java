@@ -13,8 +13,10 @@ public class OntoApp {
 
         OntoCapecManagement onto = new OntoCapecManagement();
         OntModel modelCapec = onto.createModel();
-        onto.makeQuery(modelCapec);
-        //onto.reasoningTasks(modelCapec);
+        //onto.makeQuery(modelCapec, "SELECT ?subject ?object WHERE { ?subject myns:hasName ?object }");
+        //onto.detectInconsistency(modelCapec);
+        //onto.instanceChecking(modelCapec, "", "Abstraction");
+        onto.findSubclass(modelCapec, "Id" , "AttackPattern");
     }
     
 }
