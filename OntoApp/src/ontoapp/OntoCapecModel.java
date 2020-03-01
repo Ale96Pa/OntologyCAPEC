@@ -13,10 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.jena.ontology.Individual;
+import org.apache.jena.ontology.IntersectionClass;
+import org.apache.jena.ontology.MinCardinalityRestriction;
 import org.apache.jena.ontology.ObjectProperty;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.ontology.SomeValuesFromRestriction;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
 
 
 public class OntoCapecModel {
@@ -153,6 +157,18 @@ public class OntoCapecModel {
         relatedPattern.addDomain(attackPattern);
         relatedPattern.addRange(attackPattern);
         
+        /**********************
+         * COMPLEX EXPRESSION *
+         *********************/
+        // Risk :::is::: >=2 exploits AND exist(hasLikelihood).Likelihood.
+        SomeValuesFromRestriction existLikelihood = 
+                m.createSomeValuesFromRestriction( null, hasLikelihood, likelihood);
+        
+        MinCardinalityRestriction minExploit =
+                m.createMinCardinalityRestriction(null, exploits, 2);
+        
+        IntersectionClass risk = m.createIntersectionClass( myns + "Risk", 
+                    m.createList( new RDFNode[] {existLikelihood, minExploit} ));
         
         /****************
          * DISJOINTNESS *

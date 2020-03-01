@@ -22,9 +22,7 @@ public class GuiResult {
         theText.setEditable(false);
         theText.setVisible(true);
         
-        for(String text : list){
-            theText.append(text + "\n"); //append the contents of the array list to the text area
-        }
+        for(String text : list){theText.append(text + "\n");}
         mainPanel.add(theText); //add the text area to the panel
         
         JScrollPane scroll = new JScrollPane(theText);

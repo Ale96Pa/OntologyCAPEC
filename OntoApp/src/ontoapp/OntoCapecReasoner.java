@@ -92,7 +92,7 @@ public class OntoCapecReasoner {
                 for(int i=1; i<numVar; i++){
                         varsStringPrint = varsStringPrint + "|" + vars[i].replace(" ", "");
                     }
-                System.out.println(":::::::: RESULT in format: ["+varsStringPrint+"]");
+//                System.out.println("RESULT in format: ["+varsStringPrint+"]");
                 resultsOfQuery.add("RESULT in format: ["+varsStringPrint+"]\n");
                 
                 // Parse the result
@@ -104,15 +104,15 @@ public class OntoCapecReasoner {
                         results[i-1] = res.toString().split("#")[1];
                     }
                     // Print the result
-                    System.out.println(Arrays.toString(results));
+//                    System.out.println(Arrays.toString(results));
                     resultsOfQuery.add(Arrays.toString(results));
                 }
             }
             // Catch: the try fails, so it is a boolean query through ASK
             catch(QueryExecException e){
                 boolAsk = queryExec.execAsk();
-                System.out.println("::: BOOLEAN CHECKING SOLUTION :::");
-                System.out.println(boolAsk);
+//                System.out.println("::: BOOLEAN CHECKING SOLUTION :::");
+//                System.out.println(boolAsk);
                 resultsOfQuery.add("BOOLEAN CHECKING SOLUTION: " + boolAsk);
             }
             queryExec.close();             
@@ -161,15 +161,15 @@ public class OntoCapecReasoner {
         // Check validity of consistency
         ValidityReport validity = inf.validate();
         if (validity.isValid()){
-            System.out.println("The model is Consistent");
+//            System.out.println("The model is Consistent");
             results.add("The model is Consistent");
         }
         else{
-            System.out.println("The model is Inconsistent:");
+//            System.out.println("The model is Inconsistent:");
             results.add("The model is Inconsistent:");
             for (Iterator i = validity.getReports(); i.hasNext(); ){
                 ValidityReport.Report report =(ValidityReport.Report)i.next();
-                System.out.println(" - " + report);
+//                System.out.println(" - " + report);
                 results.add(" - " + report);
             }
         }
@@ -216,7 +216,7 @@ public class OntoCapecReasoner {
             ExtendedIterator instances = conceptC.listInstances();
             while (instances.hasNext()){
                 Individual thisInstance = (Individual) instances.next();
-                System.out.println(thisInstance.toString().split("#")[1]);
+//                System.out.println(thisInstance.toString().split("#")[1]);
                 results.add(thisInstance.toString().split("#")[1]);
             }
         } else{

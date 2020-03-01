@@ -9,13 +9,16 @@ import org.apache.jena.ontology.OntModel;
 public class OntoApp {
     
     public static void startQuery(OntoCapecReasoner reasoner, OntModel modelCapec, int index){
+        
+//        System.out.println("\nA - QUERY ANSWERING: return likelihood of attack patterns with HIGH severity.");
         ArrayList<String> header = new ArrayList<>();
-        //System.out.println("\nA - QUERY ANSWERING: return likelihood of attack patterns with HIGH severity.");
         header.add("A - QUERY ANSWERING: return likelihood of attack patterns with HIGH severity.");
+      
         String queryExample = "SELECT ?attackPatternName ?likelihood "
                             + "WHERE {?attackPattern myns:hasSeverity myns:High. "
                             + "?attackPattern myns:hasLikelihood ?likelihood. "
                             + "?attackPattern myns:hasName ?attackPatternName}";
+        
         ArrayList<String> res = reasoner.makeQuery(modelCapec, queryExample);
         header.addAll(res);
         GuiResult guiQuery = new GuiResult(header, "Query Answering", index);
@@ -25,15 +28,18 @@ public class OntoApp {
         ArrayList<String> headerA = new ArrayList<>();
         ArrayList<String> headerB = new ArrayList<>();
         ArrayList<String> headerC = new ArrayList<>();
-        //System.out.println("\nA - CONSISTENCY: is the model fully consistent?");
+        
+//        System.out.println("\nA - CONSISTENCY: is the model fully consistent?");
         headerA.add("A - CONSISTENCY: is the model fully consistent?");
         ArrayList<String> res1 = reasoner.detectInconsistency(modelCapec, false, false);
         headerA.addAll(res1);
-        //System.out.println("\nB - CONCEPT INCONSISTENCY: are all concept consistent?");
+        
+//        System.out.println("\nB - CONCEPT INCONSISTENCY: are all concept consistent?");
         headerB.add("\nB - CONCEPT INCONSISTENCY: are all concept consistent?");
         ArrayList<String> res2 = reasoner.detectInconsistency(modelCapec, false, true);
         headerB.addAll(res2);
-        //System.out.println("\nC - ONTOLOGY INCONSISTENCY: is the ontology consistent?");
+        
+//        System.out.println("\nC - ONTOLOGY INCONSISTENCY: is the ontology consistent?");
         headerC.add("\nC - ONTOLOGY INCONSISTENCY: is the ontology consistent?");
         ArrayList<String> res3 = reasoner.detectInconsistency(modelCapec, true, false);
         headerC.addAll(res3);
@@ -48,17 +54,17 @@ public class OntoApp {
         ArrayList<String> headerB = new ArrayList<>();
         ArrayList<String> headerC = new ArrayList<>();
         
-        //System.out.println("\nA - T-Box CLASSIFICATION: return all subclasses");
+//        System.out.println("\nA - T-Box CLASSIFICATION: return all subclasses");
         headerA.add("A - T-Box CLASSIFICATION: return all subclasses");
         ArrayList<String> res1 = reasoner.findSubclass(modelCapec, "", "");
         headerA.addAll(res1);
         
-        //System.out.println("\nB - CONCEPT SUBSUMPTION: is concept 'Skill' subsumed by 'Attacker' ?");
+//        System.out.println("\nB - CONCEPT SUBSUMPTION: is concept 'Skill' subsumed by 'Attacker' ?");
         headerB.add("\nB - CONCEPT SUBSUMPTION: is concept 'Skill' subsumed by 'Attacker' ?");
         ArrayList<String> res2 = reasoner.findSubclass(modelCapec, "Skill", "Attacker");
         headerB.addAll(res2);
         
-        //System.out.println("\nC - CONCEPT SUBSUMPTION: is concept 'Status' subsumed by 'Severity' ?");
+//        System.out.println("\nC - CONCEPT SUBSUMPTION: is concept 'Status' subsumed by 'Severity' ?");
         headerC.add("\nC - CONCEPT SUBSUMPTION: is concept 'Status' subsumed by 'Severity' ?");
         ArrayList<String> res3 = reasoner.findSubclass(modelCapec, "Status", "Severity");
         headerC.addAll(res3);
@@ -73,17 +79,17 @@ public class OntoApp {
         ArrayList<String> headerB = new ArrayList<>();
         ArrayList<String> headerC = new ArrayList<>();
         
-        //System.out.println("\nA - INSTANCE CHECKING: is individual 'Standard' instance of 'Abstraction'?");
+//        System.out.println("\nA - INSTANCE CHECKING: is individual 'Standard' instance of 'Abstraction'?");
         headerA.add("A - INSTANCE CHECKING: is individual 'Standard' instance of 'Abstraction'?");
         ArrayList<String> res1 = reasoner.instanceChecking(modelCapec, "Standard", "Abstraction");
         headerA.addAll(res1);
         
-        //System.out.println("\nB - INSTANCE CHECKING: is individual 'Standard' instance of 'Status'?");
+//        System.out.println("\nB - INSTANCE CHECKING: is individual 'Standard' instance of 'Status'?");
         headerB.add("\nB - INSTANCE CHECKING: is individual 'Standard' instance of 'Status'?");
         ArrayList<String> res2 = reasoner.instanceChecking(modelCapec, "Standard", "Status");
         headerB.addAll(res2);
         
-        //System.out.println("\nC - INSTANCE RETRIEVAL: which are the instances of concept 'Name' ?");
+//        System.out.println("\nC - INSTANCE RETRIEVAL: which are the instances of concept 'Name' ?");
         headerC.add("\nC - INSTANCE RETRIEVAL: which are the instances of concept 'Name' ?");
         ArrayList<String> res3 = reasoner.instanceChecking(modelCapec, "", "Name");
         headerC.addAll(res3);
@@ -101,9 +107,20 @@ public class OntoApp {
         OntModel modelCapec = onto.createModel();
         System.out.println("Ontology created in file: "+onto.ontologyPath +"\n");
         
+        System.out.print("Doing query ...");
         startQuery(reasoner, modelCapec, 0);
+        System.out.print(" DONE!\n");
+        
+        System.out.print("Doing subsumption ...");
         startSubsumption(reasoner, modelCapec, 1);
+        System.out.print(" DONE!\n");
+        
+        System.out.print("Doing instance checking ...");
         startInstanceChecking(reasoner, modelCapec, 2);
+        System.out.print(" DONE!\n");
+        
+        System.out.print("Doing consistency ...");
         startConsistency(reasoner, modelCapec, 3);
+        System.out.print(" DONE!\n");
     }
 }
