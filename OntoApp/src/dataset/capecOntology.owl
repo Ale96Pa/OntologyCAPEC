@@ -35,6 +35,9 @@
   <owl:Class rdf:about="http://krstProj.com/capec#MitigationAction">
     <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attack"/>
   </owl:Class>
+  <owl:Class rdf:about="http://krstProj.com/capec#Resource">
+    <rdfs:subClassOf rdf:resource="http://krstProj.com/capec#Attacker"/>
+  </owl:Class>
   <owl:ObjectProperty rdf:about="http://krstProj.com/capec#reduces">
     <rdfs:range rdf:resource="http://krstProj.com/capec#Attack"/>
     <rdfs:domain rdf:resource="http://krstProj.com/capec#MitigationAction"/>
@@ -68,6 +71,7 @@
     <rdfs:domain rdf:resource="http://krstProj.com/capec#AttackPattern"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="http://krstProj.com/capec#uses">
+    <rdfs:range rdf:resource="http://krstProj.com/capec#Resource"/>
     <rdfs:domain rdf:resource="http://krstProj.com/capec#Attacker"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasStatus">
@@ -1087,6 +1091,7 @@
                     <j.0:implies rdf:resource="http://krstProj.com/capec#null"/>
                   </j.0:Attack>
                 </j.0:reduces>
+                <rdf:type rdf:resource="http://krstProj.com/capec#Resource"/>
                 <j.0:reduces>
                   <j.0:Attack rdf:about="http://krstProj.com/capec#attack28">
                     <j.0:relatedTo>
@@ -1712,6 +1717,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An adversary must be able install a purpose built malicious application onto the Android device and convince the user to execute it. The malicious application will be used to issue spoofed intents.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker8">
     <j.0:relatedTo>
@@ -1745,6 +1751,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::None::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker68">
     <j.0:relatedTo>
@@ -1774,6 +1781,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must know the location of these common key files.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker44">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#202"/>
@@ -1783,6 +1793,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The targeted service must make assumptions about the behavior of the client application that interacts with it  which can be abused by an adversary.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must be able to reverse engineer a client of the targeted service. However  the adversary does not need to reverse engineer all client functionality - they only need to recreate enough of the functionality to access the desired server functionality.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Leverage encryption to encode the transmission of data thus making it accessible only to authorized parties.::">
     <j.0:reduces>
@@ -1902,6 +1915,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Often achieved by nation states in conjunction with commercial cellular providers to conduct cellular traffic intercept and possible traffic injection.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker43">
     <j.0:relatedTo>
@@ -1939,6 +1953,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To issue the request to URL without given a specific file name:LEVEL:Low::SKILL:To bypass the access control of the directory of listings:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Ability to send HTTP requests to a web application.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker67">
     <j.0:relatedTo>
@@ -1972,6 +1989,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary requires strong inter-personal and communication skills.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To limit one&apos;s exposure to this type of attack  developers should avoid exporting components unless the component is specifically designed to handle requests from untrusted applications. Developers should be aware that declaring an intent filter will automatically export the component  exposing it to public access. Critical  state-changing actions should not be placed in exported components. If a single component handles both inter- and intra-application requests  the developer should consider dividing that component into separate components. If a component must be exported (e.g.  to receive system broadcasts)  then the component should dynamically check the caller&apos;s identity prior to performing any operations. Requiring Signature or SignatureOrSystem permissions is an effective way of limiting a component&apos;s exposure to a set of trusted applications. Finally  the return values of exported components can also leak private data  so developers should check the caller&apos;s identity prior to returning sensitive values.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack20"/>
@@ -2059,6 +2077,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The victim must follow a crafted link that references a scripting file that is mis-typed as a non-executable file.::The victim&apos;s browser must detect the true type of a mis-labeled scripting file and invoke the appropriate script interpreter without first performing filtering on the content.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must have the ability to source the file of the incorrect MIME type containing a script.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker22">
     <j.0:relatedTo>
@@ -2090,6 +2111,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:This attack pattern often requires the technical ability to modify a malicious software package (e.g. Zeus) to spider a targeted site and a way to trick a user into a malicious software download.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of an attack  explicit intents should be used whenever sensitive data is being sent. An &apos;explicit intent&apos; is delivered to a specific application as declared within the intent  whereas an &apos;implicit intent&apos; is directed to an application as defined by the Android operating system. If an implicit intent must be used  then it should be assumed that the intent will be received by an unknown application and any response should be treated accordingly (i.e.  with appropriate security controls).::Never use implicit intents for inter-application communication.::">
     <j.0:reduces>
@@ -2122,6 +2144,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::1021::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker9">
     <j.0:relatedTo>
@@ -2153,6 +2176,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The attacker must be able to place the malicious binary on the target machine.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker69">
     <j.0:relatedTo>
@@ -2184,6 +2208,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary knows how to send HTTP request  run the scan tool.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary requires a variety of tools to collect information about the target. These include port/network scanners and tools to analyze responses from applications to determine version and configuration information. Footprinting a system adequately may also take a few days if the attacker wishes the footprinting attempt to go undetected.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker45">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#544"/>
@@ -2191,6 +2218,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::None::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker180">
     <j.0:relatedTo>
@@ -2220,6 +2248,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to the software currently deployed at a victim location. This access is often obtained by leveraging another attack pattern to gain permissions that the adversary wouldn&apos;t normally have.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use a message authentication code (MAC) or another mechanism to perform verification of message authenticity / integrity prior to decryption Implementation: Do not leak information back to the user as to any cryptography (e.g.  padding) encountered during decryption.::">
     <j.0:reduces>
@@ -2274,6 +2303,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to install the keylogger  either in person or remote.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use browser technologies that do not allow client side scripting.::Design: Utilize strict type  character  and encoding enforcement::Design: Server side developers should not proxy content via XHR or other means  if a http proxy for remote content is setup on the server side  the client&apos;s browser has no way of discerning where the data is originating from.::Implementation: Ensure all content that is delivered to client is sanitized against an acceptable content specification.::Implementation: Perform input validation for all remote content.::Implementation: Perform output validation for all remote content.::Implementation: Session tokens for specific host::Implementation: Patching software. There are many attack vectors for XSS on the client side and the server side. Many vulnerabilities are fixed in service packs for browser  web servers  and plug in technologies  staying current on patch release that deal with XSS countermeasures mitigates this.::">
     <j.0:reduces>
@@ -2360,6 +2390,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Creating malicious Flash or Applet to open a cross-domain socket connection to a remote system:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker24">
     <j.0:relatedTo>
@@ -2387,6 +2418,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An adversary requires some way of interacting with the system.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A tool  such as a MITM Proxy or a fuzzer  that is capable of generating and injecting custom inputs to be used in the attack.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Ensure that proper  physical system access is regulated to prevent an adversary from physically connecting a malicious USB device himself.::Use anti-virus and anti-malware tools which can prevent malware from executing if it finds its way onto a target system. Additionally  make sure these tools are regularly updated to contain up-to-date virus and malware signatures.::Do not connect untrusted USB devices to systems connected on an organizational network. Additionally  use an isolated testing machine to validate untrusted devices and confirm malware does not exist.::">
     <j.0:reduces>
@@ -2421,6 +2455,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target must associate data or activities with a person&apos;s identity and the adversary must be able to modify this identity without detection.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Leverage stateful firewalls that allow for the rejection of a packet that is not part of an existing connection.::">
     <j.0:reduces>
@@ -2471,6 +2508,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::None. All applications rely on file paths and therefore  in theory  they or their resources could be affected by this type of attack.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker23">
     <j.0:relatedTo>
@@ -2496,6 +2534,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Leverage anti-virus products to detect stop operations with known virus.::">
     <j.0:reduces>
@@ -2550,6 +2589,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The use of the file must be controlled by the file extension.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Usage of configuration settings  such as stream ciphers vs. block ciphers and setting timeouts on SSL sessions to extremely low values lessens the potential impact. Use of later versions of TLS (e.g. TLS 1.1+) can also be effective  but not all clients or servers support the later versions.::">
     <j.0:reduces>
@@ -2616,6 +2656,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Hijacking a thread involves knowledge of how processes and threads function on the target platform  the design of the target application as well as the ability to identify the primitives to be used or manipulated to hijack the thread.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack. The adversary needs to be able to latch onto a privileged thread. The adversary does  however  need to be able to program  compile  and link to the victim binaries being executed so that it will turn control of a privileged thread over to the adversary&apos;s malicious code. This is the case even if the adversary conducts the attack remotely.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker49">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#542"/>
@@ -2623,6 +2666,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Test custom written Regex with fuzzing to determine if the Regex is a poor one. Add timeouts to processes that handle the Regex logic. If an evil Regex is found rewrite it as a good Regex.::">
     <j.0:reduces>
@@ -2682,6 +2726,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary must have some knowledge of how messages are routed.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker25">
     <j.0:relatedTo>
@@ -2715,6 +2760,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have gained access to the target system via physical or logical means in order to carry out this attack.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker28">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#554"/>
@@ -2722,6 +2768,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::424::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker117">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#441"/>
@@ -2731,6 +2778,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to the component currently deployed at a victim location.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker0">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#628"/>
@@ -2742,6 +2790,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:This attack requires advanced knoweldge in GPS technology.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Utilize strict type  character  and encoding enforcement::Ensure all input content that is delivered to client is sanitized against an acceptable content specification.::Perform input validation for all content.::Enforce regular patching of software.::">
     <j.0:reduces>
@@ -2817,6 +2866,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::Access to the software currently deployed at a victim location. This access is often obtained by leveraging another attack pattern to gain permissions that the adversary wouldn&apos;t normally have.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Employ code obfuscation techniques to prevent the adversary from reverse engineering the targeted entity.::">
     <j.0:reduces>
@@ -2894,6 +2944,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Knowledge of the target system&apos;s vulnerabilities that can be capitalized on with malicious code.The adversary must be able to place the malicious code on the target system.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The means by which the adversary intends to place the malicious code on the system dictates the tools required. For example  suppose the adversary wishes to leverage social engineering and convince a legitimate user to open a malicious file attached to a seemingly legitimate email. In this case  the adversary might require a tool capable of wrapping malicious code into an innocuous filetype (e.g.  PDF  .doc  etc.)::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker139">
     <j.0:relatedTo>
@@ -2925,6 +2978,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the ability to generate a large amount of TCP traffic to send to the target port of a functioning server.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker2">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#89"/>
@@ -2936,6 +2990,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The attacker needs to be able to poison the resolver - DNS entries or local hosts file or router entry pointing to a trusted DNS server - in order to successfully carry out a pharming attack. Setting up a fake website  identical to the targeted one  does not require special skills.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack. Having knowledge of the way the target site has been structured  in order to create a fake version  is required. Poisoning the resolver requires knowledge of a vulnerability that can be exploited.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Hard Coded Alternate DNS server in applications Avoid dependence on DNS Include hosts file/IP address in the application Ensure best practices with respect to communications channel protections. Use a .onion domain with Tor support::">
     <j.0:reduces>
@@ -2966,6 +3023,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker29">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#540"/>
@@ -2975,6 +3033,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::For this type of attack to be successful  a few prerequisites must be met. First  the targeted software must be written in a language that enables fine grained buffer control. (e.g.  c  c++) Second  the targeted software must actually perform buffer operations and inadequately perform bounds-checking on those buffer operations. Finally  the adversary must have the capability to influence the input that guides these buffer operations.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker1">
     <j.0:relatedTo>
@@ -3010,6 +3069,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To overwrite/modify targeted DNS cache:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must have the resources to modify the targeted cache. In addition  in most cases the adversary will wish to host the sites to which users will be redirected  although in some cases redirecting to a third party site will accomplish the adversary&apos;s goals.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker138">
     <j.0:relatedTo>
@@ -3037,6 +3099,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the ability to generate a large amount of SSL traffic to send a target server.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker114">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#452"/>
@@ -3046,6 +3109,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to the hardware currently deployed at a victim location.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Keep patches up to date by installing weekly or daily if possible.::Identify programs that may be used to acquire peripheral information and block them by using a software restriction policy or tools that restrict program execution by process whitelisting.::">
     <j.0:reduces>
@@ -3180,6 +3244,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary must typically overcome network and host defenses in order to place malware on the system.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Malware capable of acting on the adversary&apos;s objectives.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To limit one&apos;s exposure to this type of attack  tunnel communications through a secure proxy service.::Detection of this type of attack can be done through heuristic analysis of behavioral anomalies (a la credit card fraud detection) which can be used to identify inhuman behavioral patterns. (e.g.  spidering)::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack22"/>
@@ -3217,6 +3284,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary typically requires physical proximity to the target&apos;s environment  whether for physical eavesdropping or for placing recording equipment. This is not always the case for software-based eavesdropping  if the adversary has the capability to install malware on the target system that can activate a microphone and record audio digitally.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::For logical eavesdropping  some equipment may be necessary (e.g.  microphone  tape recorder  etc.). For physical eavesdropping  only proximity is required.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Identify programs (such as net) that may be used to enumerate local group permissions and block them by using a software restriction Policy or tools that restrict program execution by process whitelisting.::">
     <j.0:reduces>
@@ -3288,6 +3358,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::284::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker157">
     <j.0:relatedTo>
@@ -3323,6 +3394,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Adversaries must be able to register DNS hostnames/URL’s.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Identify programs that may be used to acquire security tool information and block them by using a software restriction policy or tools that restrict program execution by process whitelisting.::">
     <j.0:reduces>
@@ -3398,6 +3470,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must use a parameter encoding where separators and parameter identifiers are expressed in regular text.::The target application must accept a string as user input  fail to sanitize characters that have a special meaning in the parameter encoding  and insert the user-supplied string in an encoding which is then processed.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack. The only requirement is the ability to provide string input to the target.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker156">
     <j.0:relatedTo>
@@ -3427,6 +3502,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::An adversary requires knowledge of popular or high traffic domains  that could be used to deceive potential targets.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:Adversaries must be able to register DNS hostnames/URL’s.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker155">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#616"/>
@@ -3438,6 +3514,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Adversaries can often purchase low-cost technology to implement rogue access points.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker131">
     <j.0:relatedTo>
@@ -3469,6 +3546,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must identify a programmatic means for interacting with a buffer  such as vulnerable C code  and be able to provide input to this interaction.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Assess software during development and prior to deployment to ensure that it functions as intended and without any malicious functionality.::">
     <j.0:reduces>
@@ -3501,6 +3579,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The client and/or server must utilize a protocol that has a weakness allowing manipulation of the interaction.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must be able to identify the weakness in the utilized protocol and exploit it. This may require a sniffing tool as well as packet creation abilities. The adversary will be aided if they can force the client and/or server to utilize a specific protocol known to contain exploitable weaknesses.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Assess design documentation prior to development to ensure that they function as intended and without any malicious functionality.::Ensure that design documentation is saved in a secure location and has proper access controls set in place to avoid unnecessary modification.::">
     <j.0:reduces>
@@ -3584,6 +3665,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Trick the operating system in loading a malicious DLL instead of a legitimate DLL.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker130">
     <j.0:relatedTo>
@@ -3613,6 +3695,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The targeted application or service must rely on web service protocols in such a way that malicious manipulation of them can alter functionality.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The attacker must be able to manipulate the communications to the targeted application or service.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker178">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#217"/>
@@ -3624,6 +3709,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The attacker needs real-time access to network traffic in such a manner that the attacker can grab needed information from the SSL stream  possibly influence the decided-upon encryption method and options  and perform automated analysis to decipher encrypted material recovered. Tools exist to automate part of the tasks  but to successfully use these tools in an attack scenario requires detailed understanding of the underlying principles.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The attacker needs the ability to sniff traffic  and optionally be able to route said traffic to a system where the sniffing of traffic can take place  and act upon the recovered traffic in real time.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use libraries and templates that minimize unfiltered input.::Implementation: Normalize  filter and white list any input that will be used in error messages.::Implementation: The victim should configure the browser to minimize active content from untrusted sources.::">
     <j.0:reduces>
@@ -3654,6 +3742,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker137">
     <j.0:relatedTo>
@@ -3681,6 +3770,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the ability to generate a large amount of ICMP traffic to send to the target server.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker113">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#247"/>
@@ -3690,6 +3780,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target must fail to remove invalid characters from input and fail to adequately scan beyond these characters.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker136">
     <j.0:relatedTo>
@@ -3717,6 +3808,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the ability to generate a large amount of HTTP traffic to send to a target server.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker112">
     <j.0:relatedTo>
@@ -3746,6 +3838,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must fail to adequately sanitize HTML attributes against the presence of dangerous commands.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The attacker must trick the victim into following a crafted link to a vulnerable server or view a web post where the dangerous commands are executed.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Strong physical security can help reduce the ability of an adversary to install a keylogger.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack48"/>
@@ -3782,6 +3877,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Ability to create a malicious library.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker111">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#594"/>
@@ -3791,6 +3887,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must leverage an open communications channel.::The channel on which the target communicates must be vulnerable to interception (e.g.  man in the middle attack).::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A tool  such as a MITM Proxy  that is capable of generating and injecting custom inputs to be used in the attack.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker159">
     <j.0:relatedTo>
@@ -3820,6 +3919,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::An adversary requires knowledge of popular or high traffic domains  that could be used to deceive potential targets.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:Adversaries must be able to register DNS hostnames/URL’s.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker135">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#571"/>
@@ -3827,6 +3927,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of an attack  an organization can monitor the typical traffic flow. When spikes in usage occur  filters could examine traffic for indicators of bad behavior with respect to the web servers  and then create firewall rules to deny the malicious IP addresses. These patterns in the filter could be a combination of trained behavior  knowledge of standards as they apply to the web server  known patterns  or anomaly detection. Firewalling source IPs works since the HTTP is sent using TCP so the source IP can&apos;t be spoofed; if the source IP is spoofed is  then it&apos;s not legitimate traffic. Special care should be taken care with rule sets to ensure low false positive rates along with a method at the application layer to allow a valid user to begin using the service again. Another possible solution is using 3rd party providers as they have experts  knowledge  experience  and resources to deal with the attack and mitigate it before hand or while it occurs. The best mitigation is preparation before an attack  but there is no bulletproof solution as with ample resources a brute force attack may succeed.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack136"/>
@@ -3880,6 +3981,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have the capability to write to the Windows Registry on the targeted system.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker110">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#596"/>
@@ -3889,6 +3991,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An On/In Path Device::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker158">
     <j.0:relatedTo>
@@ -3918,6 +4021,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::An adversary requires knowledge of popular or high traffic domains  that could be used to deceive potential targets.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:Adversaries must be able to register DNS hostnames/URL’s.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker134">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#113"/>
@@ -3927,6 +4031,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target system must expose API functionality in a manner that can be discovered and manipulated by an adversary. This may require reverse engineering the API syntax or decrypting/de-obfuscating client-server exchanges.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The requirements vary depending upon the nature of the API. For application-layer APIs related to the processing of the HTTP protocol  one or more of the following may be needed: a MITM (Man-In-The-Middle) proxy  a web browser  or a programming/scripting language.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker172">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#145"/>
@@ -3936,6 +4043,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must be able to intercept a message from the sender (keeping the recipient from getting it)  modify it  and send the modified message to the recipient.::The sender and recipient must use a checksum to protect the integrity of their message and transmit this checksum in a manner where the adversary can intercept and modify it.::The checksum value must be computable using information known to the adversary. A cryptographic checksum  which uses a key known only to the sender and recipient  would thwart this attack.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must have a utility that can intercept and modify messages between the sender and recipient.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker60">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#312"/>
@@ -3945,6 +4055,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to monitor and interact with network communications.Access to at least one host  and the privileges to interface with the network interface card.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Any type of active probing that involves non-standard packet headers requires the use of raw sockets  which is not available on particular operating systems (Microsoft Windows XP SP 2  for example). Raw socket manipulation on Unix/Linux requires root privileges. A tool capable of sending and receiving packets from a remote system.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker197">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#601"/>
@@ -3952,6 +4065,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker84">
     <j.0:relatedTo>
@@ -3977,6 +4091,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::284::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker195">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#301"/>
@@ -3986,6 +4101,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires logical access to the target network. The TCP connect Scan requires the ability to connect to an available port and complete a &apos;three-way-handshake&apos; This scanning technique does not require any special privileges in order to perform. This type of scan works against all TCP/IP stack implementations.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary can leverage a network mapper or scanner  or perform this attack via routine socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker171">
     <j.0:relatedTo>
@@ -4021,6 +4139,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Setup DNS server and the adversary&apos;s web server. Write a malicious script to allow the victim to connect to the web server.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must serve some web content that a victim accesses initially. This content must include executable content that queries the adversary&apos;s DNS name (to provide the second DNS resolution) and then performs the follow-on attack against the internal system. The adversary also requires a customized DNS server that serves an IP address for their registered DNS name  but which resolves subsequent requests by a single client to addresses internal to that client&apos;s network.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker83">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#633"/>
@@ -4030,6 +4151,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This pattern of attack is only applicable when a downstream user leverages tokens to verify identity  and then takes action based on that identity.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::While some information is shared by systems automatically based on standards and protocols  remove potentially sensitive information that is not necessary for the application&apos;s functionality as much as possible.::">
     <j.0:reduces>
@@ -4107,6 +4229,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Simple command line attacks or to inject the malicious payload in a web page.:LEVEL:Low::SKILL:Customizing attacks to bypass non trivial filters in the application.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The ability to manually manipulate path information either directly through a client application relative to the service or application or via a proxy application.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Identify unnecessary system utilities or potentially malicious software that may contain functionality to identify network share information  and audit and/or block them by using whitelisting tools.::">
     <j.0:reduces>
@@ -4141,6 +4266,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have the means and knowledge of how to communicate with the target in some manner.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:The adversary requires strong inter-personal and communication skills.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker170">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#285"/>
@@ -4152,6 +4278,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary needs to know certain linux commands for this type of attack.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Scanners or utilities that provide the ability to send custom ICMP queries.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Assess software and software components during development and prior to deployment to ensure that they function as intended and without any malicious functionality.::">
     <j.0:reduces>
@@ -4202,6 +4331,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary requires privileged credentials or the development/acquiring of a tailored remote access tool.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker62">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#541"/>
@@ -4209,6 +4339,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::None::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Identify programs that may be used to acquire account information and block them by using a software restriction policy or tools that restrict program execution by process whitelisting.::">
     <j.0:reduces>
@@ -4332,6 +4463,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To inject the malicious payload in a web page:LEVEL:Low::SKILL:To bypass non trivial filters in the application:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Ability to send HTTP request to a web application.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker61">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#313"/>
@@ -4341,6 +4475,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to monitor network communications.Access to at least one host  and the privileges to interface with the network interface card.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Any tool capable of monitoring network communications  like a packet sniffer (e.g.  Wireshark)::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Implementation: Validate object before deserialization process Design: Limit which types can be deserialized. Implementation: Avoid having unnecessary types or gadgets available that can be leveraged for malicious ends. Whitelist acceptable classes. Implementation: Keep session state on the server  when possible.::">
     <j.0:reduces>
@@ -4375,6 +4512,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have the ability to create a new root certificate.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker177">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#174"/>
@@ -4384,6 +4522,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The attacker need inject values into the global parameters to the Flash file and understand the parent HTML document DOM structure. The attacker need be smart enough to convince the victim to his crafted link.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The attacker must convince the victim to click their crafted link.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker64">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#414"/>
@@ -4391,6 +4532,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker153">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#590"/>
@@ -4400,6 +4542,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This attack requires the ability to conduct deep packet inspection with an In-Path device that can drop the targeted traffic and/or connection.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker40">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#548"/>
@@ -4407,6 +4550,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker88">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#242"/>
@@ -4416,6 +4560,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target software does not validate user-controlled input such that the execution of a process may be altered by sending code in through legitimate data channels  using no other mechanism.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker151">
     <j.0:relatedTo>
@@ -4449,6 +4594,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary requires the ability to traverse directory structure.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker87">
     <j.0:relatedTo>
@@ -4482,6 +4628,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Once the adversary has logical access (which can potentially require high knowledge and skill level)  the adversary needs only the capability and facility to navigate the system through the OS graphical user interface or the command line.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker176">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#194"/>
@@ -4491,6 +4638,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This attack is only applicable when a vulnerable entity associates data or services with an identity. Without such an association  there would be no reason to fake the source.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Resources required vary depending on the nature of the attack. Possible tools needed by an attacker could include tools to create custom network packets  specific client software  and tools to capture network traffic. Many variants of this attack require no attacker resources  however.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker63">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#415"/>
@@ -4498,6 +4648,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker152">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#65"/>
@@ -4509,6 +4660,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The attacker needs to setup a sniffer for a sufficient period of time so as to capture meaningful quantities of code. The presence of the sniffer should not be detected on the network. Also if the attacker plans to employ a man-in-the-middle attack  the client or server must not realize this. Finally  the attacker needs to regenerate source code from binary code if the need be.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The Attacker needs the ability to capture communications between the client being updated and the server providing the update. In the case that encryption obscures client/server communication the attacker will either need to lift key material from the client.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker150">
     <j.0:relatedTo>
@@ -4536,6 +4690,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An adversary has access to the file system of a system.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Limit the amount of resources that are accessible to unprivileged users.::Assume all input is malicious. Consider all potentially relevant properties when validating input.::Consider uniformly throttling all requests in order to make it more difficult to consume resources more quickly than they can again be freed.::Use resource-limiting settings  if possible.::">
     <j.0:reduces>
@@ -4571,6 +4726,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::522::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker42">
     <j.0:relatedTo>
@@ -4604,6 +4760,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Some level of access to modify the target schema.::The schema used by the target application must be improperly secured against unauthorized modification and manipulation.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Access to the schema and the knowledge and ability modify it. Ability to replace or redirect access to the modified schema.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker175">
     <j.0:relatedTo>
@@ -4635,6 +4794,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have control of a router that can modify  drop  or introduce spoofed BGP updates.The adversary can convince::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::BGP Router::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker66">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#412"/>
@@ -4642,6 +4804,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::The only known mitigation to this attack is to avoid installing the malicious application on the device. Applications usually have to declare the schemes they wish to register  so detecting this during a review is feasible.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack23"/>
@@ -4654,6 +4817,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The protocol or implementations thereof must contain bugs that an adversary can exploit.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::In some variants of this attack the adversary must be able to intercept communications using the protocol. This means they need to be able to receive the communications from one participant and prevent the other participant from receiving these communications.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker65">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#413"/>
@@ -4661,6 +4827,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker198">
     <j.0:relatedTo>
@@ -4690,6 +4857,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have the means and knowledge of how to communicate with the target in some manner.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:The adversary requires strong inter-personal and communication skills.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use browser technologies that do not allow client side scripting.::Design: Utilize strict type  character  and encoding enforcement::Design: Server side developers should not proxy content via XHR or other means  if a http proxy for remote content is setup on the server side  the client&apos;s browser has no way of discerning where the data is originating from.::Implementation: Ensure all content that is delivered to client is sanitized against an acceptable content specification.::Implementation: Perform input validation for all remote content  including remote and user-generated content::Implementation: Perform output validation for all remote content.::Implementation: Disable scripting languages such as JavaScript in browser::Implementation: Session tokens for specific host::Implementation: Patching software. There are many attack vectors for XSS on the client side and the server side. Many vulnerabilities are fixed in service packs for browser  web servers  and plug in technologies  staying current on patch release that deal with XSS countermeasures mitigates this.::Implementation: Privileges are constrained  if a script is loaded  ensure system runs in chroot jail or other limited authority mode::">
     <j.0:reduces>
@@ -4744,6 +4912,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::15::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::Some level of access to modify the target schema.::The schema used by the target application must be improperly secured against unauthorized modification and manipulation.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::Access to the schema and the knowledge and ability modify it. Ability to replace or redirect access to the modified schema.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker174">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#138"/>
@@ -4753,6 +4922,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must utilize reflection libraries and allow users to directly control the parameters to these methods. If the adversary can host classes where the target can invoke them  more powerful variants of this attack are possible.::The target application must accept a string as user input  fail to sanitize characters that have a special meaning in the parameter encoding  and insert the user-supplied string in an encoding which is then processed.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker89">
     <j.0:relatedTo>
@@ -4784,6 +4954,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Understanding of how to force an MD5 hash collision in X.509 certificates:LEVEL:High::SKILL:An attacker must be able to craft two X.509 certificates that produce the same MD5 hash:LEVEL:High::SKILL:Knowledge needed to set up a certification authority:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use libraries and templates that minimize unfiltered input.::Implementation: Normalize  filter and white list all input including that which is not expected to have any scripting content.::Implementation: The victim should configure the browser to minimize active content from untrusted sources.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack112"/>
@@ -4821,6 +4992,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must unserialize data before validation.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use browser technologies that do not allow client side scripting.::Design: Utilize strict type  character  and encoding enforcement::Design: Server side developers should not proxy content via XHR or other means  if a http proxy for remote content is setup on the server side  the client&apos;s browser has no way of discerning where the data is originating from.::Implementation: Ensure all content that is delivered to client is sanitized against an acceptable content specification.::Implementation: Perform input validation for all remote content.::Implementation: Perform output validation for all remote content.::Implementation: Disable scripting languages such as JavaScript in browser::Implementation: Session tokens for specific host::Implementation: Patching software. There are many attack vectors for XSS on the client side and the server side. Many vulnerabilities are fixed in service packs for browser  web servers  and plug in technologies  staying current on patch release that deal with XSS countermeasures mitigates this.::">
     <j.0:reduces>
@@ -4853,6 +5025,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Leverage anti-virus products to detect and quarantine software with known virus.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack180"/>
@@ -4869,6 +5042,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This pattern of attack requires a temporal aspect to the servicing of a given request. Success can be achieved if the adversary can make requests that collectively take more time to complete than legitimate user requests within the same time frame.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::To successfully execute this pattern of attack  a script or program is often required that is capable of continually engaging the target and maintaining sustained usage of a specific resource. Depending on the configuration of the target  it may or may not be necessary to involve a network or cluster of objects all capable of making parallel requests.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker79">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#578"/>
@@ -4878,6 +5054,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have the capability to interact with the configuration of the targeted system.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker55">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#63"/>
@@ -4889,6 +5066,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To achieve a redirection and use of less trusted source  an attacker can simply place a script in bulletin board  blog  wiki  or other user-generated content site that are echoed back to other client machines.:LEVEL:Low::SKILL:Exploiting a client side vulnerability to inject malicious scripts into the browser&apos;s executable process.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Ability to deploy a custom hostile service for access by targeted clients. Ability to communicate synchronously or asynchronously with client machine.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Certification Authorities need to stop using the weak collision prone MD5 hashing algorithm to hash the certificates that they are about to sign. Instead they should be using stronger hashing functions such as SHA-256 or SHA-512.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack89"/>
@@ -4902,6 +5082,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker58">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#192"/>
@@ -4913,6 +5094,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Knowlegde of the Open Systems Interconnection model (OSI model)  and famililarity with Wireshark or some other packet analyzer.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Depending on the type of analysis  a variety of tools might be required  such as static code and/or dynamic analysis tools. Alternatively  the effort might require debugging programs such as ollydbg  SoftICE  or disassemblers like IDA Pro. In some instances  packet sniffing or packet analyzing programs such as TCP dump or Wireshark are necessary. Lastly  specific protocol analysis might require tools such as PDB (Protocol Debug)  or packet injection tools like pcap or Nemesis.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker34">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#406"/>
@@ -4922,6 +5106,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An adversary must have physical access to the dumpster or downstream processing facility.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Verify that files have proper access controls set  and reduce the storage of sensitive information to only what is necessary.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack150"/>
@@ -4942,6 +5127,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary needs to know basic linux commands.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker33">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#603"/>
@@ -4951,6 +5137,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This attack pattern requires knowledge of where important system resources are logically located as well as how they operate.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker192">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#293"/>
@@ -4960,6 +5147,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::A network capable of routing the attackers&apos; packets to the destination network.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A command line version of traceroute or similar tool that performs route enumeration.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker36">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#224"/>
@@ -4971,6 +5161,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Some fingerprinting activity requires very specific knowledge of how different operating systems respond to various TCP/IP requests. Application fingerprinting can be as easy as envoking the application with the correct command line argument  or mouse clicking in the appropriate place on the screen.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::If on a network  the adversary needs a tool capable of viewing network communications at the packet level and with header information  like Mitmproxy  Wireshark  or Fiddler.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of an attack  an organization can attempt to identify the 3rd party services being used in an active attack and blocking them until the attack ends. This can be accomplished by filtering traffic for suspicious message patterns such as a spike in traffic where each response contains the same large block of data. Care should be taken to prevent false positive rates so legitimate traffic isn&apos;t blocked.::">
     <j.0:reduces>
@@ -4999,6 +5192,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::None::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker191">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#330"/>
@@ -5006,6 +5200,9 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The ability to monitor and interact with network communications.Access to at least one host  and the privileges to interface with the network interface card.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A tool capable of sending/receiving UDP datagram packets from a remote system to a closed port and receive an ICMP Error Message Type 3  Port Unreachable..::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker59">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#191"/>
@@ -5015,6 +5212,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to a binary or executable such that it can be analyzed by various utilities.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Binary analysis programs such as &apos;strings&apos; or &apos;grep&apos;  or hex editors.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Identify programs that may be used to acquire process information and block them by using a software restriction policy or tools that restrict program execution by process whitelisting.::">
     <j.0:reduces>
@@ -5049,6 +5249,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target must accept service requests from the attacker and the adversary must be able to control the resource allocation associated with this request to be in excess of the normal allocation. The latter is usually accomplished through the presence of a bug on the target that allows the adversary to manipulate variables used in the allocation.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker11">
     <j.0:relatedTo>
@@ -5078,6 +5279,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary needs to be able to infect the victim system in a manner that gives him remote access.:LEVEL:Medium::SKILL:If analyzing the Windows registry  the adversary must understand the registry structure to know where to look for devices.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker190">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#329"/>
@@ -5085,6 +5287,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The ability to monitor and interact with network communications.Access to at least one host  and the privileges to interface with the network interface card.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::A tool capable of sending/receiving UDP datagram packets from a remote system to a closed port and receive an ICMP Error Message Type 3  Port Unreachable..::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker38">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#446"/>
@@ -5094,6 +5297,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to the software during the development phase. This access is often obtained via insider access to include the 3rd party component after deployment.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Monitor network activity to detect any anomalous or unauthorized communication exchanges.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack47"/>
@@ -5128,6 +5332,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::284::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Configure the access control correctly.::Design: Enforce principle of least privilege.::Design: Execute programs with constrained privileges  so parent process does not open up further vulnerabilities. Ensure that all directories  temporary directories and files  and memory are executing with limited privileges to protect against remote execution.::Design: Input validation. Assume that user inputs are malicious. Utilize strict type  character  and encoding enforcement.::Design: Proxy communication to host  so that communications are terminated at the proxy  sanitizing the requests before forwarding to server host.::Design: Run server interfaces with a non-root account and/or utilize chroot jails or other configuration techniques to constrain privileges even if attacker gains some limited access to commands.::Implementation: Host integrity monitoring for critical files  directories  and processes. The goal of host integrity monitoring is to be aware when a security issue has occurred so that incident response and other forensic activities can begin.::Implementation: Perform input validation for all remote content  including remote and user-generated content.::Implementation: Perform testing such as pen-testing and vulnerability scanning to identify directories  programs  and interfaces that grant direct access to executables.::Implementation: Use indirect references rather than actual file names.::Implementation: Use possible permissions on file access when developing and deploying web applications.::Implementation: Validate user input by only accepting known good. Ensure all content that is delivered to client is sanitized against an acceptable content specification -- whitelisting approach.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack196"/>
@@ -5164,6 +5369,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Minimize error/response output to only what is necessary for functional use or corrective language.::Remove potentially sensitive information that is not necessary for the application&apos;s functionality.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack24"/>
@@ -5181,6 +5387,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The adversary must be able to obtain or develop  as well as place malicious software inside the target network/system.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::The adversary requires a variety of tools to collect information about the target. These include port/network scanners and tools to analyze responses from applications to determine version and configuration information. Footprinting a system adequately may also take a few days if the attacker wishes the footprinting attempt to go undetected.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker16">
     <j.0:relatedTo>
@@ -5210,6 +5417,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the adversary to convince the user to load the malicious web page inside the target application. Once loaded  the malicious web page will have the same permissions as the target application and will have access to all registered interfaces. Both the permission and the interface must be in place for the functionality to be exposed.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Implement Ingress filters to check the validity of received routes. However  this relies on the accuracy of Internet Routing Registries (IRRs) databases which are often not well-maintained. Implement Secure BGP (S-BGP protocol)  which improves authorization and authentication capabilities based on public-key cryptography.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack175"/>
@@ -5220,6 +5428,9 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The target application must leverage an open communications channel.::The channel on which the target communicates must be vulnerable to interception (e.g.  man in the middle attack).::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A tool that is capable of viewing network traffic and generating custom inputs to be used in the attack.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker105">
     <j.0:relatedTo>
@@ -5251,6 +5462,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::693::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Authenticating both services and their discovery  and protecting that authentication mechanism simply fixes the bulk of this problem. Protecting the authentication involves the standard means  including: 1) protecting the channel over which authentication occurs  2) preventing the theft  forgery  or prediction of authentication credentials or the resultant tokens  or 3) subversion of password reset and the like.::">
     <j.0:reduces>
@@ -5290,6 +5502,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Any target that services requests is vulnerable to this attack on some level of scale.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A script or program capable of generating more requests than the target can handle  or a network or cluster of objects all capable of making simultaneous requests.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker15">
     <j.0:relatedTo>
@@ -5323,6 +5538,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Although fuzzing parameters is not difficult  and often possible with automated fuzzers  interpreting the error conditions and modifying the parameters so as to move further in the process of mapping the application requires detailed knowledge of target platform  the languages and packages used as well as software design.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The Attacker needs the ability to probe application functionality and provide it erroneous directives or data without triggering intrusion detection schemes or making enough of an impact on application logging that steps are taken against the attacker. The Attack does not need special hardware  software  skills  or access.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker128">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#248"/>
@@ -5332,6 +5550,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must accept input from the user and then use this input in the construction of commands to be executed. In virtually all cases  this is some form of string input that is concatenated to a constant string defined by the application to form the full command to be executed.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Enforce strict schema validation. The schema should enforce a maximum number of array elements. If the number of maximum array elements can&apos;t be limited another validation method should be used. One such method could be comparing the declared number of items in the array with the existing number of elements of the array. If these numbers don&apos;t match drop the SOAP packet at the web service layer.::">
     <j.0:reduces>
@@ -5362,6 +5581,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The targeted applications must either expect files to be located at a specific location or  if the location of the files can be configured by the user  the user either failed to move the files from the default location or placed them in a conventional location for files of the given type.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack. In some cases  the attacker need not even have direct access to the locations on the target computer where the targeted resources reside.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker18">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#500"/>
@@ -5371,6 +5593,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An adversary must be able install a purpose built malicious application onto the device and convince the user to execute it. The malicious application is designed to target a specific web application and is used to load the target web pages via the WebView component. For example  an adversary may develop an application that interacts with Facebook via WebView and adds a new feature that a user desires. The user would install this 3rd party app instead of the Facebook app.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker127">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#457"/>
@@ -5380,6 +5603,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Some level of physical access to the device being attacked.::Information pertaining to the target organization on how to best execute a USB Drop Attack.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Limit the usage of formatting string functions.::Strong input validation - All user-controllable input must be validated and filtered for illegal formatting characters.::">
     <j.0:reduces>
@@ -5439,6 +5663,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To achieve a redirection and use of less trusted source  an attacker can simply edit HTTP Headers that are sent to client machine.:LEVEL:Low::SKILL:Exploiting a client side vulnerability to inject malicious scripts into the browser&apos;s executable process.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must have the ability to deploy a custom hostile service for access by targeted clients and the abbility to communicate synchronously or asynchronously with client machine. The adversary must also control a remote site of some sort to redirect client and data to.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker17">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#506"/>
@@ -5448,6 +5675,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This pattern of attack requires the ability to execute a malicious application on the user&apos;s device. This malicious application is used to present the interface to the user and make the attack possible.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker126">
     <j.0:relatedTo>
@@ -5483,6 +5711,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:An attacker can inject different representation of a filtered character in a different encoding.:LEVEL:Low::SKILL:An attacker may craft subtle encoding of input data by using the knowledge that he/she has gathered about the target host.:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Use browser technologies that do not allow client side scripting.::Design: Utilize strict type  character  and encoding enforcement::Implementation: Ensure all content that is delivered to client is sanitized against an acceptable content specification.::Implementation: Ensure all content coming from the client is using the same encoding; if not  the server-side application must canonicalize the data before applying any filtering.::Implementation: Perform input validation for all remote content  including remote and user-generated content::Implementation: Perform output validation for all remote content.::Implementation: Disable scripting languages such as JavaScript in browser::Implementation: Patching software. There are many attack vectors for XSS on the client side and the server side. Many vulnerabilities are fixed in service packs for browser  web servers  and plug in technologies  staying current on patch release that deal with XSS countermeasures mitigates this.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack193"/>
@@ -5493,6 +5722,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::284::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker109">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#135"/>
@@ -5504,6 +5734,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:In order to discover format string vulnerabilities it takes only low skill  however  converting this discovery into a working exploit requires advanced knowledge on the part of the adversary.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of an attack  an application should limit permissions to only those required and should verify the origin of all web content it loads.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack16"/>
@@ -5536,6 +5767,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::An adversary must be able install a purpose built malicious application onto the Android device and convince the user to execute it. The malicious application is used to intercept implicit intents.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker108">
     <j.0:relatedTo>
@@ -5567,6 +5799,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target software is utilizing application framework APIs::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Identify potentially malicious software that may have functionality to acquire screen captures  and audit and/or block it by using whitelisting tools.::While screen capture is a legitimate and practical function  certain situations and context may require the disabling of this feature.::">
     <j.0:reduces>
@@ -5606,6 +5839,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Once the adversary has logical access (which can potentially require high knowledge and skill level)  the adversary needs only to leverage the relevant command for screen capture.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Range  size and value and consistency verification for any arguments supplied to applications and services from external sources and devise appropriate error response.::Design: Ensure that function calls that should not be called by an unprivileged user are not accessible to them.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack130"/>
@@ -5639,6 +5873,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of attack requires the existence of a physical target that an adversary believes hosts something of value.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To help protect an application from buffer manipulation attacks  a number of potential mitigations can be leveraged. Before starting the development of the application  consider using a code language (e.g.  Java) or compiler that limits the ability of developers to act beyond the bounds of a buffer. If the chosen language is susceptible to buffer related issues (e.g.  C) then consider using secure functions instead of those vulnerable to buffer manipulations. If a potentially dangerous function must be used  make sure that proper boundary checking is performed. Additionally  there are often a number of compiler-based mechanisms (e.g.  StackGuard  ProPolice and the Microsoft Visual Studio /GS flag) that can help identify and protect against potential buffer issues. Finally  there may be operating system level preventative functionality that can be applied.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack131"/>
@@ -5723,6 +5958,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Able to develop and manufacture malicious hardware components that perform the same functions and processes as their non-malicious counterparts.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker169">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#294"/>
@@ -5732,6 +5968,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to send an ICMP type 17 query (Address Mask Request) to a remote target and receive an ICMP type 18 message (ICMP Address Mask Reply) in response. Generally  modern operating systems will ignore ICMP type 17 messages  however  routers will commonly respond to this request.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The ability to send custom ICMP queries. This can be accomplished via the use of various scanners or utilities.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker145">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#70"/>
@@ -5743,6 +5982,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:An adversary just needs to gain access to common default usernames/passwords specific to the technologies used by the system. Additionally  a brute force attack leveraging common passwords can be easily realized if the user name is known.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Technology or vendor specific list of default usernames and passwords.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Typically  an IDS/IPS system is very effective against this type of attack.::">
     <j.0:reduces>
@@ -5776,6 +6018,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the attacker to know the endpoint of the web service  and be able to reach the endpoint with a malicious SOAP message.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::File extensions should be checked to see if non-visible characters are being included.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack26"/>
@@ -5786,6 +6029,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::300::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::This attack requires the ability to conduct deep packet inspection with an In-Path device that can drop the targeted traffic and/or connection.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker168">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#296"/>
@@ -5795,6 +6039,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to send an ICMP Type 15 Information Request and receive an ICMP Type 16 Information Reply in response.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:The adversary needs to know certain linux commands for this type of attack.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::Scanners or utilities that provide the ability to send custom ICMP queries.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker90">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#162"/>
@@ -5804,6 +6049,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The targeted site must contain hidden fields to be modified.::The targeted site must not validate the hidden fields with backend processing.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must have the ability to modify hidden fields by editing the HTTP response to the server.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker143">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#492"/>
@@ -5813,6 +6061,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the ability to identify hosts running a poorly implemented Regex  and the ability to send crafted input to exploit the regular expression.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of attack  physical security techniques such as locks doors  alarms  and monitoring of targets should be implemented.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack106"/>
@@ -5823,6 +6072,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The ability to monitor and interact with network communications.Access to at least one host  and the privileges to interface with the network interface card.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::A tool capable of sending/receiving UDP datagram packets from a remote system to a closed port and receive an ICMP Error Message Type 3  Port Unreachable..::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Assess software during development and prior to deployment to ensure that it functions as intended and without any malicious functionality.::Leverage anti-virus products to detect and quarantine software with known virus.::">
     <j.0:reduces>
@@ -5853,6 +6103,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires the ability to send a UDP datagram to a remote host and receive a response.::The adversary requires the ability to craft custom UDP Packets for use during network reconnaissance.::The target&apos;s firewall must not be configured to block egress ICMP messages.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::UDP pings can be performed via the use of a port scanner or by raw socket manipulation using a scripting or programming language. Packet injection tools are also useful for this purpose. Depending upon the technique used it may also be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker142">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#490"/>
@@ -5862,6 +6115,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the existence of a 3rd party service that generates a response that is significantly larger than the request that triggers it.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Employ a robust network defensive posture that includes a managed IDS/IPS.::">
     <j.0:reduces>
@@ -5894,6 +6148,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target must transmit data over a medium that is accessible to the adversary.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary must have the necessary technology to intercept information passing between the nodes of a network. For TCP/IP  the capability to run tcpdump  ethereal  etc. can be useful. Depending upon the data being targeted the technological requirements will change.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker92">
     <j.0:relatedTo>
@@ -5925,6 +6182,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To modify the entries in the configuration file pointing to malicious libraries:LEVEL:Low::SKILL:To force symlink and timing issues for redirecting access to libraries:LEVEL:Medium::SKILL:To reverse engineering the libraries and inject malicious code into the libraries:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker125">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#212"/>
@@ -5936,6 +6194,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:General computer knowledge about how applications are launched  how they interact with input/output  and how they are configured.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker101">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#240"/>
@@ -5945,6 +6204,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application allows the user to both specify the identifier used to access a system resource. Through this permission  the user gains the capability to perform actions on that resource (e.g.  overwrite the file)::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Cloud providers should completely delete data to render it irrecoverable and inaccessible from any layer and component of infrastructure resources.::Deletion of data should be completed promptly when requested.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack151"/>
@@ -5960,6 +6220,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Influence over the deployed system at a victim location.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker100">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#155"/>
@@ -5969,6 +6230,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must utilize temporary files and must fail to adequately secure them against other parties reading them.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Because some application may have a large number of temporary files and/or these temporary files may be very large  an adversary may need tools that help them quickly search these files for sensitive information. If the adversary can simply copy the files to another location and if the speed of the search is not important  the adversary can still perform the attack without any special resources.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Application Architects must be careful to design callback  signal  and similar asynchronous constructs such that they shed excess privilege prior to handing control to user-written (thus untrusted) code.::Application Architects must be careful to design privileged code blocks such that upon return (successful  failed  or unpredicted) that privilege is shed prior to leaving the block/scope.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack6"/>
@@ -5981,6 +6245,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to system design documentation prior to the development phase. This access is often obtained via insider access or by leveraging another attack pattern to gain permissions that the adversary wouldn&apos;t normally have.::Ability to forge web communications to deliver modified design documentation.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker124">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#122"/>
@@ -5990,6 +6255,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target must have misconfigured their access control mechanisms such that sensitive information  which should only be accessible to more trusted users  remains accessible to less trusted users.::The adversary must have access to the target  albeit with an account that is less privileged than would be appropriate for the targeted resources.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack. The ability to access the target is required.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Ensure proper permissions are set for Registry hives to prevent users from modifying keys.::Employ a robust and layered defensive posture in order to prevent unauthorized users on your system.::Employ robust identification and audit/blocking via whitelisting of applications on your system. Unnecessary applications  utilities  and configurations will have a presence in the system registry that can be leveraged by an adversary through this attack pattern.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack86"/>
@@ -6000,6 +6268,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have gained access to the target system via physical or logical means in order to carry out this attack.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker70">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#309"/>
@@ -6007,6 +6276,9 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::None::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Probing requires the ability to interactively send and receive data from a target  whereas passive listening requires a sufficient understanding of the protocol to analyze a preexisting channel of communication.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of an attack  explicit intents should be used whenever sensitive data is being sent. An explicit intent is delivered to a specific application as declared within the intent  whereas the Android operating system determines who receives an implicit intent which could potentially be a malicious application. If an implicit intent must be used  then it should be assumed that the intent will be received by an unknown application and any response should be treated accordingly. Implicit intents should never be used for inter-application communication.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack19"/>
@@ -6019,6 +6291,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target must provide content but fail to adequately protect it against modification.The adversary must have the means to alter data to which he/she is not authorized.If the content is to be modified in transit  the adversary must be able to intercept the targeted messages.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::If the content is to be modified in transit  the adversary requires a tool capable of intercepting the target&apos;s communication and generating/creating custom packets to impact the communications. In some variants  the targeted content is altered so that all or some of it is redirected towards content published by the attacker (for example  images and frames in the target&apos;s web site might be modified to be loaded from a source controlled by the attacker). In these cases  the attacker requires the necessary resources to host the replacement content.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker123">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#463"/>
@@ -6028,6 +6303,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The decryption routine does not properly authenticate the message / does not verify its integrity prior to performing the decryption operation::The target system leaks data (in some way) on whether a padding error has occurred when attempting to decrypt the ciphertext.::The padding oracle remains available for enough time / for as many requests as needed for the adversary to decrypt the ciphertext.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Ability to detect instances where a target system is vulnerable to an oracle padding attack Sufficient cryptography knowledge and tools needed to take advantage of the presence of the padding oracle to perform decryption / encryption of data without a key::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Assume all input might use an improper representation. Use canonicalized data inside the application; all data must be converted into the representation used inside the application (UTF-8  UTF-16  etc.)::Assume all input is malicious. Create a white list that defines all valid input to the software system based on the requirements specifications. Input that does not match against the white list should not be permitted to enter into the system. Test your decoding process against malicious input.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack126"/>
@@ -6040,6 +6318,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target application must include external code/libraries that are executed when the application runs and the adversary must be able to influence the specific files that get included.::The victim must run the targeted application  possibly using the crafted parameters that the adversary uses to identify the code to include.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary may need the capability to host code modules if they wish their own code files to be included.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker122">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#173"/>
@@ -6049,6 +6330,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must convince the victim into performing the decoy action.::The adversary must have the means to control a user&apos;s interface to present them with a decoy action as well as the actual malicious action. Simple versions of this attack can be performed using web pages requiring only that the adversary be able to host (or control) content that the user visits.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Do not follow any links that you receive within your e-mails and certainly do not input any login credentials on the page that they take you too. Instead  call your Bank  PayPal  eBay  etc.  and inquire about the problem. A safe practice would also be to type the URL of your bank in the browser directly and only then log in. Also  never reply to any e-mails that ask you to provide sensitive information of any kind.::">
     <j.0:reduces>
@@ -6085,6 +6367,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to the system during the development phase to alter and/or modify software and hardware components. This access is often obtained via insider access or by leveraging another attack pattern to gain permissions that the adversary wouldn&apos;t normally have.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Keep patches up to date by installing weekly or daily if possible.::Shut down unnecessary services/ports.::Change default passwords by choosing strong passwords.::Curtail unexpected input.::Encrypt and password-protect sensitive data.::Avoid including information that has the potential to identify and compromise your organization&apos;s security such as access to business plans  formulas  and proprietary documents.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack69"/>
@@ -6095,6 +6378,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have the means and knowledge of how to communicate with the target in some manner.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:The adversary requires strong inter-personal and communication skills.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Prevent adversary access to privileged accounts necessary to install rootkits.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack84"/>
@@ -6107,6 +6391,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::RPC scanning requires no special privileges when it is performed via a native system utility.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The ability to craft custom RPC datagrams for use during network reconnaissance via native OS utilities or a port scanning tool. By tailoring the bytes injected one can scan for specific RPC-registered services. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::1. Using blank index.html: putting blank index.html simply prevent directory listings from displaying to site visitors.::2. Preventing with .htaccess in Apache web server: In .htaccess  write Options-indexes.::3. Suppressing error messages: using error 403 Forbidden message exactly like error 404 Not Found message.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack43"/>
@@ -6119,6 +6406,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to send UDP datagrams to a host and receive ICMP error messages from that host. In cases where particular types of ICMP messaging is disallowed  the reliability of UDP scanning drops off sharply.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The ability to craft custom UDP Packets for use during network reconnaissance. This can be accomplished via the use of a port scanner  or via socket manipulation in a programming or scripting language. Packet injection tools are also useful. It is also necessary to trap ICMP diagnostic messages during this process. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker96">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#577"/>
@@ -6128,6 +6418,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary must have gained access to the target system via physical or logical means in order to carry out this attack.::Administrator permissions are required to view the home folder of other users.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker185">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#418"/>
@@ -6135,6 +6426,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have the means and knowledge of how to communicate with the target in some manner.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#::SKILL:The adversary requires strong inter-personal and communication skills.:LEVEL:Low::"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker183">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#300"/>
@@ -6144,6 +6436,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires logical access to the target&apos;s network in order to carry out this type of attack.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The adversary requires a network mapping/scanning tool  or must conduct socket programming on the command line. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Protect the schema against unauthorized modification.::Implementation: For applications that use a known schema  use a local copy or a known good repository instead of the schema reference supplied in the XML document. Additionally  ensure that the proper permissions are set on local files to avoid unauthorized modification.::Implementation: For applications that leverage remote schemas  use the HTTPS protocol to prevent modification of traffic in transit and to avoid unauthorized modification.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack42"/>
@@ -6159,6 +6454,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::TCP Window scanning requires the use of raw sockets  and thus cannot be performed from some Windows systems (Windows XP SP 2  for example). On Unix and Linux  raw socket manipulations require root privileges.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The ability to send TCP segments with a custom window size to a host during network reconnaissance. This can be achieved via the use of a network mapper or scanner  or via raw socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker95">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#575"/>
@@ -6166,6 +6464,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have gained access to the target system via physical or logical means in order to carry out this attack.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker182">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#629"/>
@@ -6175,6 +6474,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Knowledge of the affected system  including what devices are connected to it  as well as knowledge of how to extract information from these devices.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Commercial defensive technology to detect and alert to any attempts to modify mobile technology data flows or to inject new data into existing data flows and signaling data.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack7"/>
@@ -6193,6 +6493,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires knowledge of and access to network route.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker98">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#576"/>
@@ -6200,6 +6501,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have gained access to the target system via physical or logical means in order to carry out this attack.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker74">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#498"/>
@@ -6209,6 +6511,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires physical access to a device to either excavate the image files (potentially by leveraging a Jailbreak) or view the screenshots through the multitasking switcher (by double tapping the home button on the device).::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Insure that binaries commonly used by the system have the correct file permissions. Set operating system policies that restrict privilege elevation of non-Administrators. Use auditing tools to observe changes to system services.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack9"/>
@@ -6223,6 +6526,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Spear phishing attacks require specific knowledge of the victims being targeted  such as which bank is being used by the victims  or websites they commonly log into (Google  Facebook  etc).:LEVEL:Medium::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::An adversay must have the ability communicate their phishing scheme to the victims (via email  instance message  etc.)  as well as a website or other platform for victims to enter personal information into.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::To mitigate this type of an attack  modern firewalls drop UDP traffic destined for closed ports  and unsolicited UDP reply packets. A variety of other countermeasures such as universal reverse path forwarding and remote triggered black holing(RFC3704) along with modifications to BGP like black hole routing and sinkhole routing(RFC3882) help mitigate the spoofed source IP nature of these attacks.::">
     <j.0:reduces>
@@ -6251,6 +6557,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::200::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have gained access to the target system via physical or logical means in order to carry out this attack.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker73">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#290"/>
@@ -6260,6 +6567,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires access to a DNS server that will return the MX records for a network.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::A command-line utility or other application capable of sending requests to the DNS server is necessary.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker140">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#486"/>
@@ -6269,6 +6579,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of an attack requires the ability to generate a large amount of UDP traffic to send to the desired port of a target service using UDP.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Ensure proper permissions are set for Registry hives to prevent users from modifying keys for system components that may lead to privilege escalation.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack81"/>
@@ -6281,6 +6592,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The target applications (or target application threads) must share data between themselves.::The adversary must be able to manipulate some piece of the shared data either directly or indirectly and the other users of the data must accept the changed data as valid. Usually this requires that the adversary be able to compromise one of the sharing applications or threads in order to manipulate the shared data.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker165">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#332"/>
@@ -6288,6 +6600,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The ability to monitor and interact with network communications.Access to at least one host  and the privileges to interface with the network interface card.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::A tool capable of sending/receiving UDP datagram packets from a remote system to a closed port and receive an ICMP Error Message Type 3  Port Unreachable..::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker52">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#188"/>
@@ -6299,6 +6612,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Understanding of low level programming languages or technologies can be very helpful. For example  when reverse engineering a binary file  an understanding of assembly languages can help to determine the purpose and inner-workings of the code. Another example is reverse engineering an application that relies on networking. Here  an understanding networking protocols can provide insight into application details.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The technical resources necessary to engage in reverse engineering differ in accordance with the type of object  resource  or system being analyzed.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker141">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#528"/>
@@ -6310,6 +6626,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Denial of service:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker189">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#303"/>
@@ -6319,6 +6636,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary needs logical access to the target network. XMAS scanning requires the use of raw sockets  and thus cannot be performed from some Windows systems (Windows XP SP 2  for example). On Unix and Linux  raw socket manipulations require root privileges.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::This attack can be carried out with a network mapper or scanner  or via raw socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Protect the schema against unauthorized modification.::Implementation: For applications that use a known schema  use a local copy or a known good repository instead of the schema reference supplied in the schema document.::Implementation: For applications that leverage remote schemas  use the HTTPS protocol to prevent modification of traffic in transit and to avoid unauthorized modification.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack41"/>
@@ -6334,6 +6654,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires logical access to the target network. NULL scanning requires the use of raw sockets  and thus cannot be performed from some Windows systems (Windows XP SP 2  for example). On Unix and Linux  raw socket manipulations require root privileges.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::This attack can be carried out via a network mapper/scanner  or via raw socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker75">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#445"/>
@@ -6343,6 +6666,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::Access to the configuration management system during deployment or currently deployed at a victim location. This access is often obtained via insider access or by leveraging another attack pattern to gain permissions that the adversary wouldn&apos;t normally have.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker164">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#297"/>
@@ -6352,6 +6676,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The ability to send an ACK packet to a remote host and identify the response. Creating the ACK packet without building a full connection requires the use of raw sockets. As a result  it is not possible to send a TCP ACK ping from some systems (Windows XP SP 2) without the use of third-party packet drivers like Winpcap. On other systems (BSD  Linux) administrative privileges are required in order to write to the raw socket.::The target must employ a stateless firewall that lacks a rule set that rejects unsolicited ACK packets.::The adversary requires the ability to craft custom TCP ACK segments for use during network reconnaissance. Sending an ACK ping requires the ability to access raw sockets in order to create the packets with direct access to the packet header.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::ACK scanning can be performed via the use of a port scanner or by raw socket manipulation using a scripting or programming language. Packet injection tools are also useful for this purpose. Depending upon the technique used it may also be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker51">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#643"/>
@@ -6361,6 +6688,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:Once the adversary has logical access (which can potentially require high knowledge and skill level)  the adversary needs only the capability and facility to navigate the system through the OS graphical user interface or the command line. The adversary  or his malware  can simply employ a set of commands that search for shared drives on the system (e.g.  net view remote system or net share).:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker99">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#416"/>
@@ -6368,6 +6696,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#::The adversary must have the means and knowledge of how to communicate with the target in some manner.::"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker162">
     <j.0:relatedTo>
@@ -6397,6 +6726,7 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To distribute email:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker54">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#32"/>
@@ -6408,6 +6738,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:To place malicious payload on server via HTTP:LEVEL:Low::SKILL:Exploiting any information gathered by HTTP Query on script host:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Ability to send HTTP post to scripting host and collect output::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker187">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#302"/>
@@ -6417,6 +6750,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::FIN scanning requires the use of raw sockets  and thus cannot be performed from some Windows systems (Windows XP SP 2  for example). On Unix and Linux  raw socket manipulations require root privileges.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::This attack pattern requires the ability to send TCP FIN segments to a host during network reconnaissance. This can be achieved via the use of a network mapper or scanner  or via raw socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker30">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#627"/>
@@ -6426,6 +6762,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:The ability to spoof GPS signals is not trival.:LEVEL:High::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::Ability to create spoofed GPS signals.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker163">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#292"/>
@@ -6435,6 +6774,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::The adversary requires logical access to the target network in order to carry out host discovery.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The resources required will differ based upon the type of host discovery being performed. Usually a network scanning tool or scanning script is required due to the volume of requests that must be generated.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker78">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#233"/>
@@ -6442,6 +6784,7 @@
     <j.0:hasKnowledge rdf:resource="http://krstProj.com/capec#::269::"/>
     <j.0:precondition rdf:resource="http://krstProj.com/capec#null"/>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Authenticate all servers and perform redundant checks when using DNS hostnames.::Purchase potential TypoSquatted domains and forward to legitimate domain.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack159"/>
@@ -6456,6 +6799,9 @@
     <j.0:need>
       <j.0:Skill rdf:about="http://krstProj.com/capec#::SKILL:A number of web service digging tools are available for free that help discover exposed web services and their interfaces. In the event that a web service is not listed  the attacker does not need to know much more in addition to the format of web service messages that he can sniff/monitor for.:LEVEL:Low::"/>
     </j.0:need>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack. Web service digging tools may be helpful.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Design: Avoid dependence on DNS::Design: Include hosts file/IP address in the application::Implementation: Utilize a .onion domain with Tor support::Implementation: DNSSEC::Implementation: DNS-hold-open::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack162"/>
@@ -6468,6 +6814,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::A third party web server which fails to adequately sanitize messages sent in error pages.::The victim must be made to execute a query crafted by the attacker which results in the infected error report.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#::None: No specialized resources are required to execute this type of attack.::"/>
   </j.0:Attacker>
   <j.0:Attacker rdf:about="http://krstProj.com/capec#attacker186">
     <j.0:relatedTo rdf:resource="http://krstProj.com/capec#287"/>
@@ -6477,6 +6824,9 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This scan type is not possible with some operating systems (Windows XP SP 2). On Linux and Unix systems it requires root privileges to use raw sockets.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses>
+      <j.0:Resource rdf:about="http://krstProj.com/capec#::The ability to send TCP SYN segments to a host during network reconnaissance via the use of a network mapper or scanner  or via raw socket programming in a scripting language. Packet injection tools are also useful for this purpose. Depending upon the method used it may be necessary to sniff the network in order to see the response.::"/>
+    </j.0:uses>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Employ robust cybersecurity training for all employees.::Implement system antivirus software that scans all attachments before opening them.::Regularly patch all software.::Execute all suspicious files in a sandbox environment.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack116"/>
@@ -6489,6 +6839,7 @@
       <j.0:Prerequisite rdf:about="http://krstProj.com/capec#::This type of attack requires a server that accepts XML data and parses the data.::"/>
     </j.0:precondition>
     <j.0:need rdf:resource="http://krstProj.com/capec#null"/>
+    <j.0:uses rdf:resource="http://krstProj.com/capec#null"/>
   </j.0:Attacker>
   <j.0:MitigationAction rdf:about="http://krstProj.com/capec#::Authenticate all servers and perform redundant checks when using DNS hostnames.::Utilize browsers that can warn users if URLs contain characters from different character sets.::">
     <j.0:reduces rdf:resource="http://krstProj.com/capec#attack156"/>

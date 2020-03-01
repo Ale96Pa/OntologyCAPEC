@@ -10,6 +10,7 @@ package ontoapp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -52,11 +53,13 @@ public class OntoCapecReasoner {
     
     /**
      * Method for query answering reasoning task
-     * @param m: model in which execute sparql query
+     * @param m: model in which execute SPARQL query
      * @param query: it can be a STRING representing the query or NULL if the 
      * query is written by user interaction.
+     * @return: the overall result in ArrayList
      */
-    public void makeQuery(OntModel m, String query){
+    public ArrayList<String> makeQuery(OntModel m, String query){
+        ArrayList<String> resultsOfQuery = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String inputSparql;
@@ -90,6 +93,7 @@ public class OntoCapecReasoner {
                         varsStringPrint = varsStringPrint + "|" + vars[i].replace(" ", "");
                     }
                 System.out.println(":::::::: RESULT in format: ["+varsStringPrint+"]");
+                resultsOfQuery.add("RESULT in format: ["+varsStringPrint+"]\n");
                 
                 // Parse the result
                 while(resultSet.hasNext()){
@@ -101,18 +105,22 @@ public class OntoCapecReasoner {
                     }
                     // Print the result
                     System.out.println(Arrays.toString(results));
+                    resultsOfQuery.add(Arrays.toString(results));
                 }
             }
             // Catch: the try fails, so it is a boolean query through ASK
             catch(QueryExecException e){
                 boolAsk = queryExec.execAsk();
-                System.out.println("::: BOOLEAN CHECKIN SOLUTION :::");
+                System.out.println("::: BOOLEAN CHECKING SOLUTION :::");
                 System.out.println(boolAsk);
+                resultsOfQuery.add("BOOLEAN CHECKING SOLUTION: " + boolAsk);
             }
             queryExec.close();             
         } catch (IOException ex) {
             Logger.getLogger(OntoCapecModel.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
+        
+        return resultsOfQuery;
     }
     
     /**
@@ -123,9 +131,11 @@ public class OntoCapecReasoner {
      * @param m: model in which to check consistency
      * @param ontoInc: true to generate inconsistency in the ontology
      * @param conceptInc: true to generate inconsistency in the concepts
+     * @return: the overall result in ArrayList
      */
-    public void detectInconsistency(OntModel m, boolean ontoInc, boolean conceptInc){
+    public ArrayList<String> detectInconsistency(OntModel m, boolean ontoInc, boolean conceptInc){
         
+        ArrayList<String> results = new ArrayList<>();
         /* Example violation 1 (ontology consistency):
         create two disjoint classes and intersect them, the result is inconsitent */
         if(ontoInc){
@@ -152,14 +162,18 @@ public class OntoCapecReasoner {
         ValidityReport validity = inf.validate();
         if (validity.isValid()){
             System.out.println("The model is Consistent");
+            results.add("The model is Consistent");
         }
         else{
-            System.out.println("The model is Inconsistent");
+            System.out.println("The model is Inconsistent:");
+            results.add("The model is Inconsistent:");
             for (Iterator i = validity.getReports(); i.hasNext(); ){
                 ValidityReport.Report report =(ValidityReport.Report)i.next();
                 System.out.println(" - " + report);
+                results.add(" - " + report);
             }
         }
+        return results;
     }
     
     
@@ -170,15 +184,18 @@ public class OntoCapecReasoner {
      * @param m: model in which reason
      * @param C: first concept C to check if it is subsumed by D (or empty for classification)
      * @param D: second concept D to check if it subsumes C (or empty for classification)
+     * @return: the overall result in ArrayList
      */
-    public void findSubclass(OntModel m, String C, String D){
+    public ArrayList<String> findSubclass(OntModel m, String C, String D){
+        ArrayList<String> results = new ArrayList<>();
         if("".equals(C) || "".equals(D)){
             // Example 1: T-Box classification
-            makeQuery(m, "SELECT ?superclass ?subclass WHERE { ?subclass rdfs:subClassOf ?superclass }");
+            results = makeQuery(m, "SELECT ?superclass ?subclass WHERE { ?subclass rdfs:subClassOf ?superclass }");
         } else{
             // Example 2: Concept subsumption
-            makeQuery(m, "ASK WHERE{ myns:"+ C + " rdfs:subClassOf myns:"+ D + " }");
+            results = makeQuery(m, "ASK WHERE{ myns:"+ C + " rdfs:subClassOf myns:"+ D + " }");
         }
+        return results;
     }
     
 
@@ -188,9 +205,11 @@ public class OntoCapecReasoner {
      * 2. Check if the instance a is instance of concept C (instance checking)
      * @param m: model on which reason
      * @param a: instance to check (or empty for retrieval)
-     * @param C: concept C to instance check 
+     * @param C: concept C to instance check
+     * @return: the overall result in ArrayList
      */
-    public void instanceChecking(OntModel m, String a, String C){
+    public ArrayList<String> instanceChecking(OntModel m, String a, String C){
+        ArrayList<String> results = new ArrayList<>();
         if("".equals(a)){
             // Example 1: instance retrieval
             OntClass conceptC = m.getOntClass(myns + C);
@@ -198,10 +217,12 @@ public class OntoCapecReasoner {
             while (instances.hasNext()){
                 Individual thisInstance = (Individual) instances.next();
                 System.out.println(thisInstance.toString().split("#")[1]);
+                results.add(thisInstance.toString().split("#")[1]);
             }
         } else{
             // Example 2: instance checking
-            makeQuery(m, "ASK WHERE{ myns:"+ a + " rdf:type myns:"+ C + " }");
+            results = makeQuery(m, "ASK WHERE{ myns:"+ a + " rdf:type myns:"+ C + " }");
         }
+        return results;
     }
 }
