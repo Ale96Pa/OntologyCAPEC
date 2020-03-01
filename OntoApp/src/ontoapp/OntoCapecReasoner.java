@@ -197,8 +197,7 @@ public class OntoCapecReasoner {
             ExtendedIterator instances = conceptC.listInstances();
             while (instances.hasNext()){
                 Individual thisInstance = (Individual) instances.next();
-                System.out.println("::: Instances of concept "+ C + ":\n" + 
-                        thisInstance.toString().split("#")[1]);
+                System.out.println(thisInstance.toString().split("#")[1]);
             }
         } else{
             // Example 2: instance checking
