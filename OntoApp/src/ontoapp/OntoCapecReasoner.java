@@ -191,6 +191,13 @@ public class OntoCapecReasoner {
         if("".equals(C) || "".equals(D)){
             // Example 1: T-Box classification
             results = makeQuery(m, "SELECT ?superclass ?subclass WHERE { ?subclass rdfs:subClassOf ?superclass }");
+            results.sort(null);
+            for(int i=1; i<results.size(); i++){
+                String[] splitted = results.get(i).split(",");
+                String sup = splitted[0].replace("[", "").replace(" ", "");
+                String sub = splitted[1].replace("]", "").replace(" ", "");  
+                if(sub.contains(sup)){results.remove(i);i--;}
+            }
         } else{
             // Example 2: Concept subsumption
             results = makeQuery(m, "ASK WHERE{ myns:"+ C + " rdfs:subClassOf myns:"+ D + " }");

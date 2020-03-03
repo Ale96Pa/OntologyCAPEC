@@ -38,9 +38,9 @@
   <owl:Class rdf:about="http://krstProj.com/capec#Risk">
     <owl:intersectionOf rdf:parseType="Collection">
       <owl:Restriction>
-        <owl:someValuesFrom rdf:resource="http://krstProj.com/capec#Likelihood"/>
+        <owl:someValuesFrom rdf:resource="http://krstProj.com/capec#Consequence"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://krstProj.com/capec#hasLikelihood"/>
+          <owl:ObjectProperty rdf:about="http://krstProj.com/capec#implies"/>
         </owl:onProperty>
       </owl:Restriction>
       <owl:Restriction>

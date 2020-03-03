@@ -80,12 +80,12 @@ public class OntoApp {
         ArrayList<String> headerC = new ArrayList<>();
         
 //        System.out.println("\nA - INSTANCE CHECKING: is individual 'Standard' instance of 'Abstraction'?");
-        headerA.add("A - INSTANCE CHECKING: is individual 'Standard' instance of 'Abstraction'?");
+        headerA.add("A - INSTANCE CHECKING: is individual 'Standard' instance of 'Abstraction' ?");
         ArrayList<String> res1 = reasoner.instanceChecking(modelCapec, "Standard", "Abstraction");
         headerA.addAll(res1);
         
 //        System.out.println("\nB - INSTANCE CHECKING: is individual 'Standard' instance of 'Status'?");
-        headerB.add("\nB - INSTANCE CHECKING: is individual 'Standard' instance of 'Status'?");
+        headerB.add("\nB - INSTANCE CHECKING: is individual 'Standard' instance of 'Status' ?");
         ArrayList<String> res2 = reasoner.instanceChecking(modelCapec, "Standard", "Status");
         headerB.addAll(res2);
         
