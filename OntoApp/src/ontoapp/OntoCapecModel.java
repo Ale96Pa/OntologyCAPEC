@@ -160,15 +160,15 @@ public class OntoCapecModel {
         /**********************
          * COMPLEX EXPRESSION *
          *********************/
-        // Risk :::is::: >=2 exploits AND exist(hasLikelihood).Likelihood.
+        // Risk :::is::: >=2 exploits AND exist(hasConsequence).Consequence.
         SomeValuesFromRestriction existConsequence = 
-                m.createSomeValuesFromRestriction( null, implies, consequence);
+                m.createSomeValuesFromRestriction(null, implies, consequence);
         
         MinCardinalityRestriction minExploit =
                 m.createMinCardinalityRestriction(null, exploits, 2);
         
-        IntersectionClass risk = m.createIntersectionClass( myns + "Risk", 
-                    m.createList( new RDFNode[] {existConsequence, minExploit} ));
+        IntersectionClass risk = m.createIntersectionClass(myns + "Risk", 
+                    m.createList(new RDFNode[] {existConsequence, minExploit} ));
         
         /****************
          * DISJOINTNESS *
