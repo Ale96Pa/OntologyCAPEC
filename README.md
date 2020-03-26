@@ -8,4 +8,4 @@ KRST (Knowledge Representation and Semantic Technology) project based on JENA AP
 Download the project and run (be sure to have JENA library installed in the project).
 
 ## Content
-The project contains the creation of ontology in a file and the tutorials about main reasoning tasks made on ontology.
+The project contains the creation of the ontology into a owl file and the operations for the main reasoning tasks over such ontology.
